@@ -1,0 +1,54 @@
+scrMain As screen:
+    OnVisible: =Refresh(Solutions)
+
+    drpSolutions As dropdown:
+        Default: ="No"
+        Height: =45
+        Items: |-
+            =Sort(
+                Filter(
+                    Solutions,
+                    'Is Visible Outside Platform' = 'Is Visible Outside Platform (Solutions)'.Yes && 
+                    'Package Type' = 'Package Type (Solutions)'.Unmanaged && 
+                    Name <> 
+                    Default && 'Solution Identifier' <> GUID("00000001-0000-0000-0001-00000000009b")
+                ),
+                'Display Name'
+            )
+        Width: =540
+        X: =40
+        Y: =39
+        ZIndex: =1
+
+    btnAddAllRequiredComponents As button:
+        Height: =41
+        OnSelect: |
+            =UpdateContext({loading: true});
+            If(
+                AddAllRequiredComponents.Run(drpSolutions.Selected.Name).result = "success",
+                Navigate(scrRemoveEnvironmentVariableValues)
+            );
+            UpdateContext({loading: false});
+        Text: ="Yes"
+        Width: =316
+        X: =40
+        Y: =124
+        ZIndex: =2
+
+    lblSelfContained As label:
+        Text: ="Do you want to make sure the Solution is self contained?"
+        Width: =540
+        X: =40
+        Y: =84
+        ZIndex: =3
+
+    imgAddAllRequiredComponentsRunning As image:
+        Height: =41
+        Image: =imgLoading
+        ImagePosition: =ImagePosition.Fill
+        Visible: =loading
+        Width: =45
+        X: =371
+        Y: =124
+        ZIndex: =4
+

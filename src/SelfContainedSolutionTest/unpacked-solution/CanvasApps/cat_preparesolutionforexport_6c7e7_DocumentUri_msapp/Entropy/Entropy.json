@@ -1,0 +1,113 @@
+{
+  "ComponentIndexes": {},
+  "ControlUniqueIds": {
+    "App": 1,
+    "btnAddAllRequiredComponents": 6,
+    "btnDeleteDuplicatesInUnmanagedSolutions": 18,
+    "btnRemoveEnvironmentVariableCurrentValues": 22,
+    "btnStartOver": 25,
+    "drpSolutions": 4,
+    "galleryTemplate1": 13,
+    "glrDuplicateResults": 12,
+    "imgAddAllRequiredComponentsRunning": 7,
+    "imgFindDuplicatesInUnmanagedSolution": 11,
+    "imgFindDuplicatesInUnmanagedSolutionRunning": 19,
+    "imgRemoveEnvironmentVariableCurrentValuesRunning": 23,
+    "lblCheckOtherUnmanaged": 10,
+    "lblDeleteDuplicatesInUnmanagedSolution": 9,
+    "lblRemoveEnvironmentVariableCurrentValues": 21,
+    "lblSelfContained": 5,
+    "lblStartOver": 24,
+    "NextArrow2": 15,
+    "scrCheckForComponentsInOtherSolutions": 8,
+    "scrMain": 3,
+    "scrRemoveEnvironmentVariableValues": 20,
+    "Separator2": 17,
+    "Subtitle2": 16,
+    "Title2": 14
+  },
+  "FunctionParamsInvariantScripts": {},
+  "HeaderLastSavedDateTimeUTC": "01/23/2022 15:20:46",
+  "LocalDatabaseReferencesAsEmpty": false,
+  "LocalResourceFileNames": {
+    "imgLoading": "fb22272a-ae90-420c-9a9d-cf87cfe516bf.gif"
+  },
+  "LocalResourceRootPaths": {
+    "imgLoading": "https://docserverpwaprodeus.blob.core.windows.net/7f90b6fa-bead-423e-8c1f-731b7ce8e761-1/resource/Assets0Images0fb22272a-ae90-420c-9a9d-cf87cfe516bf.gif?sv=2017-04-17&sr=b&sig=601YCRu%2Flo2NBAjXGX1hhFwAUi8Tbamodt4fJFCxTYI%3D&spr=https&se=2022-01-24T12%3A21%3A04Z&sp=r"
+  },
+  "OrderComponentMetadata": {},
+  "OrderComponentTemplate": {},
+  "OrderDataSource": {
+    "AddAllRequiredComponents": 0,
+    "CustomGallerySample": 12,
+    "DropDownSample": 11,
+    "FindDuplicatesInUnmanagedSolutions": 1,
+    "RemoveEnvironmentVariableCurrentValues": 2,
+    "RemoveFromUnmanagedSolutions": 3,
+    "Solutions": 10,
+    "Solutions\\default.cds_solution_views": 9,
+    "Solutions\\solution_isapimanaged": 6,
+    "Solutions\\solution_isinternal": 5,
+    "Solutions\\solution_ismanaged": 7,
+    "Solutions\\solution_isvisible": 4,
+    "Solutions\\solution_solutiontype": 8
+  },
+  "OrderGroupControls": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {
+    "button": 2,
+    "dropdown": 0,
+    "gallery": 4,
+    "icon": 5,
+    "image": 3,
+    "label": 1,
+    "rectangle": 6
+  },
+  "PublishOrderIndices": {
+    "App": 0,
+    "btnAddAllRequiredComponents": 2,
+    "btnDeleteDuplicatesInUnmanagedSolutions": 17,
+    "btnRemoveEnvironmentVariableCurrentValues": 5,
+    "btnStartOver": 19,
+    "drpSolutions": 0,
+    "galleryTemplate1": 11,
+    "glrDuplicateResults": 10,
+    "imgAddAllRequiredComponentsRunning": 3,
+    "imgFindDuplicatesInUnmanagedSolution": 9,
+    "imgFindDuplicatesInUnmanagedSolutionRunning": 16,
+    "imgRemoveEnvironmentVariableCurrentValuesRunning": 6,
+    "lblCheckOtherUnmanaged": 8,
+    "lblDeleteDuplicatesInUnmanagedSolution": 7,
+    "lblRemoveEnvironmentVariableCurrentValues": 4,
+    "lblSelfContained": 1,
+    "lblStartOver": 18,
+    "NextArrow2": 13,
+    "scrCheckForComponentsInOtherSolutions": 0,
+    "scrMain": 0,
+    "scrRemoveEnvironmentVariableValues": 0,
+    "Separator2": 15,
+    "Subtitle2": 14,
+    "Title2": 12
+  },
+  "ResourcesJsonIndices": {
+    "Image-imgLoading": 1,
+    "Image-SampleImage": 0
+  },
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.2683817,
+    "ControlCount": {
+      "button": 3,
+      "dropdown": 1,
+      "gallery": 1,
+      "galleryTemplate": 1,
+      "icon": 1,
+      "image": 4,
+      "label": 6,
+      "rectangle": 1,
+      "screen": 3
+    },
+    "DeserializationLoadTime": 2.2376301000000001,
+    "ErrorCount": 0
+  }
+}

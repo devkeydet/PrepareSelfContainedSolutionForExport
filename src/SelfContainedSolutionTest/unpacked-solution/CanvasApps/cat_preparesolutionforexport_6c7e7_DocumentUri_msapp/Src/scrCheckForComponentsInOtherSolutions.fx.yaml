@@ -1,0 +1,146 @@
+scrCheckForComponentsInOtherSolutions As screen:
+    OnVisible: |
+        =Set(
+            gblSolutionComponentsInOtherSolutions,
+            Blank()
+        );
+        UpdateContext({loading: true});
+        Set(
+            gblSolutionComponentsInOtherSolutions,
+            FindDuplicatesInUnmanagedSolutions.Run(
+                drpSolutions.Selected.'Solution Identifier',
+                drpSolutions.Selected.Name
+            )
+        );
+        UpdateContext({loading: false});
+
+    lblCheckOtherUnmanaged As label:
+        Height: =43
+        Text: ="Checking to see if the Solution has components in other unmanaged Solutions."
+        Visible: =loading
+        Width: =657
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+    "glrDuplicateResults As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+        Height: =685
+        Items: =gblSolutionComponentsInOtherSolutions
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(104, Self.Height - 60)
+        Width: =712
+        X: =40
+        Y: =83
+        ZIndex: =1
+
+        Title2 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.solutioncomponentfriendlyname
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =16
+            ZIndex: =1
+
+        Subtitle2 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.solutionfriendlyname
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =Title2.Y + Title2.Height + 4
+            ZIndex: =2
+
+        NextArrow2 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =3
+
+        Separator2 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =4
+
+    imgFindDuplicatesInUnmanagedSolution As image:
+        Height: =41
+        Image: =imgLoading
+        ImagePosition: =ImagePosition.Fill
+        Visible: =loading
+        Width: =45
+        X: =697
+        Y: =42
+        ZIndex: =2
+
+    lblDeleteDuplicatesInUnmanagedSolution As label:
+        Height: =184
+        Text: ="Your Solution has components also in other unmanaged Solutions.  Review the list.  Are you familiar with all the other Solutions? If not, please coordinate with Solution owners to address issues causing this.  For example, if the component is a connection reference you may want to point flows in other Solutions to a different connection reference.  If you are familiar and confident this is safe, would you like to remove the components from all other unmanaged solutions?"
+        Visible: =!loading && CountRows(glrDuplicateResults.AllItems) > 0
+        Width: =530
+        X: =836
+        ZIndex: =3
+
+    btnDeleteDuplicatesInUnmanagedSolutions As button:
+        OnSelect: |
+            =UpdateContext({deleting: true});
+            If(
+                RemoveFromUnmanagedSolutions.Run(JSON(gblSolutionComponentsInOtherSolutions)).response = "success",
+                Navigate(scrMain)
+            );
+            UpdateContext({deleting: false});
+        Text: ="Yes"
+        Visible: =!loading && CountRows(glrDuplicateResults.AllItems) > 0
+        X: =836
+        Y: =184
+        ZIndex: =4
+
+    imgFindDuplicatesInUnmanagedSolutionRunning As image:
+        Height: =41
+        Image: =imgLoading
+        ImagePosition: =ImagePosition.Fill
+        Visible: =deleting
+        Width: =45
+        X: =1009
+        Y: =183
+        ZIndex: =5
+
+    lblStartOver As label:
+        Height: =62
+        Text: ="Your Solution is self contained and ready for export. Would you like to start over?"
+        Visible: =!loading && CountRows(glrDuplicateResults.AllItems) = 0
+        Width: =530
+        X: =836
+        Y: =224
+        ZIndex: =6
+
+    btnStartOver As button:
+        OnSelect: =Navigate(scrMain)
+        Text: ="Yes"
+        Visible: =!loading && CountRows(glrDuplicateResults.AllItems) = 0
+        X: =836
+        Y: =286
+        ZIndex: =7
+

@@ -1,0 +1,359 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_webcontents": {
+        "api": {
+          "name": "shared_webcontents"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedwebcontents_58623"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "ApplyToEachSolutionComponent": {
+          "actions": {
+            "ApplyToEachSolution": {
+              "actions": {
+                "AppendToFindResults": {
+                  "inputs": {
+                    "name": "FindResults",
+                    "value": {
+                      "solutioncomponentfriendlyname": "@{variables('SolutionComponentNames')['msdyn_displayname']}",
+                      "solutioncomponentid": "@{items('ApplyToEachSolutionComponent')?['solutioncomponentid']}",
+                      "solutioncomponentobjectid": "@{items('ApplyToEachSolutionComponent')?['objectid']}",
+                      "solutioncomponentschemaname": "@{variables('SolutionComponentNames')['msdyn_schemaname']}",
+                      "solutioncomponenttype": "@items('ApplyToEachSolutionComponent')?['componenttype']",
+                      "solutionfriendlyname": "@{items('ApplyToEachSolution')['friendlyname']}",
+                      "solutionuniquename": "@{items('ApplyToEachSolution')['uniquename']}"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5ccced7c-b81c-42d6-b136-6422c0cbc5ed"
+                  },
+                  "runAfter": {},
+                  "type": "AppendToArrayVariable"
+                }
+              },
+              "foreach": "@body('ParseRunFindInOtherUnmanagedSolutionsJsonResponse')",
+              "metadata": {
+                "operationMetadataId": "e4f9a277-14fa-442f-93cf-d96f351793ec"
+              },
+              "runAfter": {
+                "SetSolutionComponentNames": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Foreach"
+            },
+            "GetSolutionComponentNames": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_webcontents",
+                  "connectionName": "shared_webcontents",
+                  "operationId": "InvokeHttp"
+                },
+                "parameters": {
+                  "request/method": "GET",
+                  "request/url": "@{variables('WebApiUrl')}/msdyn_solutioncomponentsummaries?$top=1&$select=msdyn_displayname,msdyn_schemaname&$filter=msdyn_objectid eq '@{items('ApplyToEachSolutionComponent')?['objectid']}'"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "3303b215-8206-4c2a-b9d7-8212bbdc2247"
+              },
+              "runAfter": {
+                "ParseRunFindInOtherUnmanagedSolutionsJsonResponse": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection"
+            },
+            "ParseRunFindInOtherUnmanagedSolutionsJsonResponse": {
+              "inputs": {
+                "content": "@body('RunFindInOtherUnmanagedSolutions')?['jsonresponse']",
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "friendlyname": {
+                        "type": "string"
+                      },
+                      "uniquename": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uniquename",
+                      "friendlyname"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "4882a9a3-afc7-4310-bc97-f883adae52be"
+              },
+              "runAfter": {
+                "RunFindInOtherUnmanagedSolutions": [
+                  "Succeeded"
+                ]
+              },
+              "type": "ParseJson"
+            },
+            "RunFindInOtherUnmanagedSolutions": {
+              "inputs": {
+                "body": {
+                  "text": "@items('ApplyToEachSolutionComponent')?['objectid']",
+                  "text_1": "@triggerBody()['text']"
+                },
+                "host": {
+                  "workflowReferenceName": "8c3b1fa9-937b-ec11-8d21-00224829f478"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "b4fd74e1-156a-4878-8907-38413dc33ec7"
+              },
+              "runAfter": {},
+              "type": "Workflow"
+            },
+            "SetSolutionComponentNames": {
+              "inputs": {
+                "name": "SolutionComponentNames",
+                "value": "@outputs('GetSolutionComponentNames')?['body']['value'][0]"
+              },
+              "metadata": {
+                "operationMetadataId": "467f2689-fc4a-4066-a5d4-f266bca1af1e"
+              },
+              "runAfter": {
+                "GetSolutionComponentNames": [
+                  "Succeeded"
+                ]
+              },
+              "type": "SetVariable"
+            }
+          },
+          "foreach": "@outputs('ListSolutionComponents')?['body/value']",
+          "metadata": {
+            "operationMetadataId": "c3ab9567-050b-4fe9-a273-64ff150ecbf7"
+          },
+          "runAfter": {
+            "InitializeSolutionComponentId": [
+              "Succeeded"
+            ]
+          },
+          "type": "Foreach"
+        },
+        "InitializeFindResults": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "FindResults",
+                "type": "array"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6bfd811c-a704-4c88-b14d-ce47a3b64605"
+          },
+          "runAfter": {
+            "ListSolutionComponents": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializeSolutionComponentId": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "SolutionComponentId",
+                "type": "string"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "510a33ae-d505-4358-a2bd-a46a311e1cd2"
+          },
+          "runAfter": {
+            "InitializeSolutionComponentNames": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializeSolutionComponentNames": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "SolutionComponentNames",
+                "type": "object"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "25cc03a8-c8bd-4d4c-8779-3992000c1f3d"
+          },
+          "runAfter": {
+            "InitializeWebApiUrl": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializeWebApiUrl": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "WebApiUrl",
+                "type": "string",
+                "value": "@{split(body('ListSolutionComponents')['@odata.context'],'/$metadata')[0]}"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "75a18706-2728-4ebe-854f-3bba7c66d78b"
+          },
+          "runAfter": {
+            "InitializeFindResults": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "ListSolutionComponents": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords"
+            },
+            "parameters": {
+              "$filter": "_solutionid_value eq '@{triggerBody()['text']}'",
+              "$select": "solutioncomponentid,componenttype,objectid",
+              "entityName": "solutioncomponents"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "f6e8afd7-5ca5-4861-9d23-d3e151d25dff"
+          },
+          "runAfter": {},
+          "type": "OpenApiConnection"
+        },
+        "Response": {
+          "inputs": {
+            "body": "@variables('FindResults')",
+            "schema": {
+              "items": {
+                "properties": {
+                  "solutioncomponentfriendlyname": {
+                    "type": "string"
+                  },
+                  "solutioncomponentid": {
+                    "type": "string"
+                  },
+                  "solutioncomponentobjectid": {
+                    "type": "string"
+                  },
+                  "solutioncomponentschemaname": {
+                    "type": "string"
+                  },
+                  "solutioncomponenttype": {
+                    "type": "integer"
+                  },
+                  "solutionfriendlyname": {
+                    "type": "string"
+                  },
+                  "solutionuniquename": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "solutioncomponentid",
+                  "solutioncomponentobjectid",
+                  "solutioncomponenttype",
+                  "solutioncomponentschemaname",
+                  "solutioncomponentfriendlyname",
+                  "solutionuniquename",
+                  "solutionfriendlyname"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "statusCode": 200
+          },
+          "kind": "Http",
+          "metadata": {
+            "operationMetadataId": "a6fdd7e6-4758-42da-bb88-99c149d7d307"
+          },
+          "runAfter": {
+            "ApplyToEachSolutionComponent": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "SolutionId",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_1": {
+                  "description": "Please enter your input",
+                  "title": "SolutionUniqueName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text",
+                "text_1"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "5c6b0986-05c2-4b64-ac1e-a350c54f845e"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

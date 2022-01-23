@@ -1,0 +1,345 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "DoUntilNoMoreSolutionComponentsAdded": {
+          "actions": {
+            "ApplyToEachSolution": {
+              "actions": {
+                "ApplyToEeachSolutionComponent": {
+                  "actions": {
+                    "Perform_an_unbound_action": {
+                      "inputs": {
+                        "authentication": "@parameters('$authentication')",
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "PerformUnboundAction"
+                        },
+                        "parameters": {
+                          "actionName": "AddSolutionComponent",
+                          "item/AddRequiredComponents": true,
+                          "item/ComponentId": "@variables('SolutionComponentId')",
+                          "item/ComponentType": "@variables('ComponentType')",
+                          "item/DoNotIncludeSubcomponents": false,
+                          "item/SolutionUniqueName": "@triggerBody()['text']"
+                        }
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d10e2456-fcb4-45a7-9986-d5a8398e7f09"
+                      },
+                      "runAfter": {
+                        "SetComponentType": [
+                          "Succeeded"
+                        ]
+                      },
+                      "type": "OpenApiConnection"
+                    },
+                    "SetComponentType": {
+                      "inputs": {
+                        "name": "ComponentType",
+                        "value": "@items('ApplyToEeachSolutionComponent')?['componenttype']"
+                      },
+                      "metadata": {
+                        "operationMetadataId": "b5761672-8a51-4b87-8a89-a17c230ff9a6"
+                      },
+                      "runAfter": {
+                        "SetSolutionComponentId": [
+                          "Succeeded"
+                        ]
+                      },
+                      "type": "SetVariable"
+                    },
+                    "SetSolutionComponentId": {
+                      "inputs": {
+                        "name": "SolutionComponentId",
+                        "value": "@items('ApplyToEeachSolutionComponent')?['objectid']"
+                      },
+                      "metadata": {
+                        "operationMetadataId": "b1b812c7-c49f-4654-9564-b55dc775b6dc"
+                      },
+                      "runAfter": {},
+                      "type": "SetVariable"
+                    }
+                  },
+                  "foreach": "@outputs('ListSolutionComponents')?['body/value']",
+                  "metadata": {
+                    "operationMetadataId": "ee1b0a21-5ee4-4a5b-914c-3017568f6280"
+                  },
+                  "runAfter": {
+                    "SetCurrentSolutionComponentCount": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Foreach"
+                },
+                "CheckCurrentSolutionCountCondition": {
+                  "actions": {
+                    "Set_variable": {
+                      "inputs": {
+                        "name": "PreviousSolutionComponentCount",
+                        "value": "@variables('CurrentSolutionComponentCount')"
+                      },
+                      "metadata": {
+                        "operationMetadataId": "49a53b17-7cee-43d2-b282-57442049da49"
+                      },
+                      "runAfter": {},
+                      "type": "SetVariable"
+                    }
+                  },
+                  "expression": {
+                    "not": {
+                      "equals": [
+                        "@variables('CurrentSolutionComponentCount')",
+                        -1
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "0d911f1c-6826-49f9-a968-b1959355b62a"
+                  },
+                  "runAfter": {},
+                  "type": "If"
+                },
+                "ListSolutionComponents": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "ListRecords"
+                    },
+                    "parameters": {
+                      "$filter": "_solutionid_value eq '@{items('ApplyToEachSolution')?['solutionid']}'",
+                      "$select": "solutioncomponentid,componenttype,objectid",
+                      "entityName": "solutioncomponents"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "57ec0351-f777-4359-b70c-0b81a0aa8a4d"
+                  },
+                  "runAfter": {
+                    "CheckCurrentSolutionCountCondition": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection"
+                },
+                "SetCurrentSolutionComponentCount": {
+                  "inputs": {
+                    "name": "CurrentSolutionComponentCount",
+                    "value": "@length(outputs('ListSolutionComponents')?['body/value'])"
+                  },
+                  "metadata": {
+                    "operationMetadataId": "113fec67-790b-4bce-badb-1c096be81785"
+                  },
+                  "runAfter": {
+                    "ListSolutionComponents": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "SetVariable"
+                }
+              },
+              "description": "WILL ONLY EVER HAVE ONE SOLUTION IN RESULT DUE TO FILTER BY UNIQUENAME",
+              "foreach": "@outputs('ListSolutionsByUniqueName')?['body/value']",
+              "metadata": {
+                "operationMetadataId": "4ed54c0c-9c6b-448b-ac6c-7fbbb40693f4"
+              },
+              "runAfter": {},
+              "type": "Foreach"
+            }
+          },
+          "expression": "@equals(variables('CurrentSolutionComponentCount'), variables('PreviousSolutionComponentCount'))",
+          "limit": {
+            "count": 5000,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "bdf20a56-f367-4072-88ad-7539993cded1"
+          },
+          "runAfter": {
+            "InitializeCurrentSolutionComponentCount": [
+              "Succeeded"
+            ]
+          },
+          "type": "Until"
+        },
+        "InitializeComponentType": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "ComponentType",
+                "type": "integer"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "56ae7293-9f28-411e-9e8e-bafefd1bc387"
+          },
+          "runAfter": {
+            "InitializeSolutionComponentId": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializeCurrentSolutionComponentCount": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "CurrentSolutionComponentCount",
+                "type": "integer",
+                "value": -1
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9b68ff56-fd02-428e-bfff-f35603c059c4"
+          },
+          "runAfter": {
+            "InitializePreviousSolutionComponentCount": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializePreviousSolutionComponentCount": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "PreviousSolutionComponentCount",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "13d5e229-525d-44b4-ad59-13e42d90e514"
+          },
+          "runAfter": {
+            "InitializeComponentType": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "InitializeSolutionComponentId": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "SolutionComponentId",
+                "type": "string"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "92c5942b-f42e-4179-91a3-91ee1afcbc20"
+          },
+          "runAfter": {
+            "ListSolutionsByUniqueName": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "ListSolutionsByUniqueName": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords"
+            },
+            "parameters": {
+              "$filter": "uniquename eq '@{triggerBody()['text']}'",
+              "$select": "solutionid",
+              "entityName": "solutions"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "2dd0180c-31c8-431a-92b1-0c4427d837aa"
+          },
+          "runAfter": {},
+          "type": "OpenApiConnection"
+        },
+        "Response": {
+          "inputs": {
+            "body": {
+              "result": "success"
+            },
+            "schema": {
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "statusCode": 200
+          },
+          "kind": "Http",
+          "metadata": {
+            "operationMetadataId": "cdd3b606-e158-4cd4-8c03-7d2a9ce9db2c"
+          },
+          "runAfter": {
+            "DoUntilNoMoreSolutionComponentsAdded": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "SolutionUniqueName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "55257f07-1d5b-44c3-88cf-bcf61d414f06"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}
