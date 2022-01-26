@@ -1,9 +1,11 @@
 function Export-Unpack ($solutionName) {
   $exportTemp = "export-temp"  
   $unpackFolder = "src/$solutionName/unpacked-solution"
+  $managedZip = "$exportTemp/$solutionName" + "_managed.zip"
 
   pac solution export --name $solutionName --path $exportTemp
-  pac solution unpack --zipfile "$exportTemp/$solutionName.zip" --folder $unpackFolder --allowDelete true
+  pac solution export --name $solutionName --path $managedZip --managed true
+  pac solution unpack --zipfile "$exportTemp/$solutionName.zip" --folder $unpackFolder --allowDelete true --packagetype both
 
   $msappFiles = Get-ChildItem -Path "$unpackFolder/CanvasApps" -Filter *.msapp
   foreach ($msappFile in $msappFiles) {

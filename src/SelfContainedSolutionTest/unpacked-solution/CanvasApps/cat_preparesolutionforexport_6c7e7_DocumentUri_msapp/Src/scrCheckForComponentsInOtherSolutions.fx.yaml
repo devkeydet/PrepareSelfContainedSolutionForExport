@@ -1,15 +1,94 @@
 scrCheckForComponentsInOtherSolutions As screen:
     OnVisible: |
-        =Set(
-            gblSolutionComponentsInOtherSolutions,
-            Blank()
+        =UpdateContext({loading: true});
+        Refresh('Solution Components');
+        ClearCollect(
+            colSolutionsNotSelected,
+            {}
         );
-        UpdateContext({loading: true});
-        Set(
-            gblSolutionComponentsInOtherSolutions,
-            FindDuplicatesInUnmanagedSolutions.Run(
-                drpSolutions.Selected.'Solution Identifier',
-                drpSolutions.Selected.Name
+        UpdateContext({selectedSolutionId: drpSolutions.Selected.'Solution Identifier'});
+        Clear(colSolutionsNotSelected);
+        ForAll(
+            glrSolutions.AllItems,
+            Collect(
+                colSolutionsNotSelected,
+                {SolutionId: 'Solution Identifier'}
+            )
+        );
+        Remove(
+            colSolutionsNotSelected,
+            LookUp(
+                colSolutionsNotSelected,
+                SolutionId = selectedSolutionId
+            )
+        );
+        ClearCollect(
+            colSolutionComponentsInOtherSolutions,
+            {}
+        );
+        Clear(colSolutionComponentsInOtherSolutions);
+        ForAll(
+            colSolutionsNotSelected,
+            If(
+                SolutionId <> gblDefaultSolutionId && SolutionId <> gblCdsDefaultSolutionId && SolutionId <> gblActiveSolutionId,
+                Collect(
+                    colSolutionComponentsInOtherSolutions,
+                    Filter(
+                        'Solution Components',
+                        Solution.'Solution Identifier' = SolutionId
+                    )
+                )
+            )
+        );
+        ClearCollect(
+            colSolutionComponentsInSelectedSolution,
+            {}
+        );
+        Clear(colSolutionComponentsInSelectedSolution);
+        Collect(
+            colSolutionComponentsInSelectedSolution,
+            Filter(
+                'Solution Components',
+                Solution.'Solution Identifier' = drpSolutions.Selected.'Solution Identifier'
+            )
+        );
+        ClearCollect(
+            colSolutionComponentsInMultipleSolutions,
+            //DropColumns(
+                Ungroup(
+                    AddColumns(
+                        RenameColumns(
+                            colSolutionComponentsInSelectedSolution,
+                            "objectid",
+                            "selectedobjectid",
+                            "solutioncomponentid",
+                            "selectedsolutioncomponentid",
+                            "solutionid",
+                            "selectedsolutionid"
+                        ) As os,
+                        "temp",
+                        Filter(
+                            colOutsideSol,
+                            Text(objectid) = Text(os.selectedobjectid)
+                        )
+                    ),
+                    "temp"
+                )/*,
+                "selectedobjectid",
+                "selectedsolutioncomponentid",
+                "selectedsolutionid"
+            )*/
+        );
+        ClearCollect(
+            colObjectIdDisplayName,
+            {}
+        );
+        Clear(colObjectIdDisplayName);
+        ForAll(
+            colSolutionComponentsInMultipleSolutions As ims,
+            Collect(
+                colObjectIdDisplayName,
+                GetSolutionComponentName.Run(ims.objectid)
             )
         );
         UpdateContext({loading: false});
@@ -25,11 +104,12 @@ scrCheckForComponentsInOtherSolutions As screen:
 
     "glrDuplicateResults As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
         Height: =685
-        Items: =gblSolutionComponentsInOtherSolutions
+        Items: =colSolutionComponentsInMultipleSolutions
         Layout: =Layout.Vertical
         TemplatePadding: =0
         TemplateSize: =Min(104, Self.Height - 60)
-        Width: =712
+        Visible: =!lblCheckOtherUnmanaged.Visible
+        Width: =686
         X: =40
         Y: =83
         ZIndex: =1
@@ -41,7 +121,7 @@ scrCheckForComponentsInOtherSolutions As screen:
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Text: =ThisItem.solutioncomponentfriendlyname
+            Text: =LookUp(colObjectIdDisplayName, msdyn_objectid = Text(ThisItem.objectid), msdyn_displayname)
             VerticalAlign: =VerticalAlign.Top
             Width: =Parent.TemplateWidth - 104
             X: =32
@@ -55,7 +135,7 @@ scrCheckForComponentsInOtherSolutions As screen:
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Text: =ThisItem.solutionfriendlyname
+            Text: =ThisItem.objectid
             VerticalAlign: =VerticalAlign.Top
             Width: =Parent.TemplateWidth - 104
             X: =32
@@ -86,13 +166,11 @@ scrCheckForComponentsInOtherSolutions As screen:
             ZIndex: =4
 
     imgFindDuplicatesInUnmanagedSolution As image:
-        Height: =41
         Image: =imgLoading
         ImagePosition: =ImagePosition.Fill
         Visible: =loading
-        Width: =45
         X: =697
-        Y: =42
+        Y: =11
         ZIndex: =2
 
     lblDeleteDuplicatesInUnmanagedSolution As label:
@@ -107,24 +185,22 @@ scrCheckForComponentsInOtherSolutions As screen:
         OnSelect: |
             =UpdateContext({deleting: true});
             If(
-                RemoveFromUnmanagedSolutions.Run(JSON(gblSolutionComponentsInOtherSolutions)).response = "success",
+                RemoveFromUnmanagedSolutions.Run(JSON(colSolutionComponentsInMultipleSolutions)).response = "success",
                 Navigate(scrMain)
             );
             UpdateContext({deleting: false});
         Text: ="Yes"
         Visible: =!loading && CountRows(glrDuplicateResults.AllItems) > 0
         X: =836
-        Y: =184
+        Y: =200
         ZIndex: =4
 
     imgFindDuplicatesInUnmanagedSolutionRunning As image:
-        Height: =41
         Image: =imgLoading
         ImagePosition: =ImagePosition.Fill
         Visible: =deleting
-        Width: =45
-        X: =1009
-        Y: =183
+        X: =1007
+        Y: =170
         ZIndex: =5
 
     lblStartOver As label:

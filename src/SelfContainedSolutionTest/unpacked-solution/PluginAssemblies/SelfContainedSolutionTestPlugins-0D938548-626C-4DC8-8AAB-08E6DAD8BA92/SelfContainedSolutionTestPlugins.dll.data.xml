@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" PluginAssemblyId="0d938548-626c-4dc8-8aab-08e6dad8ba92" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0.0.1</IntroducedVersion>
+  <FileName>/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" PluginTypeId="60b304b5-e3fa-4c88-b9d6-0ffde6a2fe60" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents">
+      <FriendlyName>33080fd1-1fe8-4e56-a82b-793456652dfb</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.FindDuplicatesInUnmanagedSolutions, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" PluginTypeId="dd05a51d-45b6-4e3a-866e-fcdff3dd4a86" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.FindDuplicatesInUnmanagedSolutions">
+      <FriendlyName>08dfad59-2810-4da8-a2b4-1e6278b0233f</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.TablePlugins.PreValidationAccountCreate, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" PluginTypeId="0446db42-2eab-4d86-aad7-113afe53a4a6" Name="SelfContainedSolutionTest.Plugins.TablePlugins.PreValidationAccountCreate">
+      <FriendlyName>31d18702-6727-4a92-b824-9bd4c92c9209</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

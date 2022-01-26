@@ -26,9 +26,9 @@
                 },
                 "parameters": {
                   "actionName": "RemoveSolutionComponent",
-                  "item/ComponentType": "@items('ApplyToEachSolutionComponent')['solutioncomponenttype']",
-                  "item/SolutionComponent/solutioncomponentid": "@items('ApplyToEachSolutionComponent')['solutioncomponentobjectid']",
-                  "item/SolutionUniqueName": "@items('ApplyToEachSolutionComponent')['solutionuniquename']"
+                  "item/ComponentType": "@items('ApplyToEachSolutionComponent')['componenttype']",
+                  "item/SolutionComponent/solutioncomponentid": "@items('ApplyToEachSolutionComponent')['objectid']",
+                  "item/SolutionUniqueName": "@items('ApplyToEachSolutionComponent')['solutionUniqueName']"
                 }
               },
               "metadata": {
@@ -90,36 +90,28 @@
             "schema": {
               "items": {
                 "properties": {
-                  "solutioncomponentfriendlyname": {
+                  "componenttype": {
+                    "type": "integer"
+                  },
+                  "objectid": {
+                    "type": "string"
+                  },
+                  "solutionId": {
+                    "type": "string"
+                  },
+                  "solutionUniqueName": {
                     "type": "string"
                   },
                   "solutioncomponentid": {
                     "type": "string"
-                  },
-                  "solutioncomponentobjectid": {
-                    "type": "string"
-                  },
-                  "solutioncomponentschemaname": {
-                    "type": "string"
-                  },
-                  "solutioncomponenttype": {
-                    "type": "integer"
-                  },
-                  "solutionfriendlyname": {
-                    "type": "string"
-                  },
-                  "solutionuniquename": {
-                    "type": "string"
                   }
                 },
                 "required": [
-                  "solutioncomponentfriendlyname",
-                  "solutioncomponentid",
-                  "solutioncomponentobjectid",
-                  "solutioncomponentschemaname",
-                  "solutioncomponenttype",
-                  "solutionfriendlyname",
-                  "solutionuniquename"
+                  "componenttype",
+                  "objectid",
+                  "solutionId",
+                  "solutionUniqueName",
+                  "solutioncomponentid"
                 ],
                 "type": "object"
               },

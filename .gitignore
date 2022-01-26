@@ -353,3 +353,5 @@ MigrationBackup/
 export-temp/
 pack-temp/
 src/GitHubCanvasApp/
+
+*.dll

@@ -1,0 +1,105 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Perform_an_unbound_action": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction"
+            },
+            "parameters": {
+              "actionName": "cat_AddAllRequiredSolutionComponents",
+              "item/RemoveEnvironmentVariableCurrentValues": true,
+              "item/SolutionId": "@triggerBody()['text']"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "06ca80b7-d023-42fa-a18d-f3ddd853174d"
+          },
+          "runAfter": {},
+          "type": "OpenApiConnection"
+        },
+        "Response": {
+          "inputs": {
+            "body": {
+              "result": "success"
+            },
+            "schema": {
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "statusCode": 200
+          },
+          "kind": "Http",
+          "metadata": {
+            "operationMetadataId": "dc05371d-ec3f-4d37-b7a4-413a824917d2"
+          },
+          "runAfter": {
+            "Perform_an_unbound_action": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "SolutionId",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "5893b5fb-5c8f-4c2b-a6da-936b0df4f89f"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

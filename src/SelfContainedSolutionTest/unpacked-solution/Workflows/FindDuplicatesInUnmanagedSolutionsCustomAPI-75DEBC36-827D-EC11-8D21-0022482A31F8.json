@@ -1,0 +1,78 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Perform_an_unbound_action": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction"
+            },
+            "parameters": {
+              "actionName": "cat_FindDuplicatesInUnmanagedSolutions",
+              "item/SolutionId": "@triggerBody()['text']"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "45bee9e5-6a9b-4cb4-b074-d16f00b5793c"
+          },
+          "runAfter": {},
+          "type": "OpenApiConnection"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "SolutionId",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "c83da3ac-c269-467e-9fe1-ea6d1ac8c9e9"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

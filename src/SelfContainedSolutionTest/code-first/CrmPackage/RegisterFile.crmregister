@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Register xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/crm/2011/tools/pluginregistration">
+  <Solutions>
+    <Solution Assembly="SelfContainedSolutionTest.Plugins.dll" Id="0d938548-626c-4dc8-8aab-08e6dad8ba92" IsolationMode="Sandbox" SourceType="Database">
+      <PluginTypes>
+        <clear />
+        <Plugin Description="Plug-in to Create of account" FriendlyName="Create of account" Name="SelfContainedSolutionTest.Plugins.TablePlugins.PreValidationAccountCreate" Id="0446db42-2eab-4d86-aad7-113afe53a4a6" TypeName="SelfContainedSolutionTest.Plugins.TablePlugins.PreValidationAccountCreate">
+          <Steps>
+            <clear />
+            <Step AsyncAutoDelete="false" Name="Create of account" Description="Create of account" Id="dec8d1fc-717d-ec11-8d21-0022482a31f8" ImpersonatingUserId="00000000-0000-0000-0000-000000000000" MessageName="Create" Mode="Synchronous" PrimaryEntityName="account" Rank="1" Stage="PreOutsideTransaction" SupportedDeployment="ServerOnly" MessageEntityId="00000000-0000-0000-0000-000000000000">
+              <Images />
+            </Step>
+          </Steps>
+        </Plugin>
+        <Plugin Description="AddAllRequiredSolutionComponents" FriendlyName="AddAllRequiredSolutionComponents" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents" Id="60b304b5-e3fa-4c88-b9d6-0ffde6a2fe60" TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents" />
+        <Plugin Description="FindDuplicatesInUnmanagedSolutions" FriendlyName="FindDuplicatesInUnmanagedSolutions" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.FindDuplicatesInUnmanagedSolutions" Id="dd05a51d-45b6-4e3a-866e-fcdff3dd4a86" TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.FindDuplicatesInUnmanagedSolutions" />
+      </PluginTypes>
+    </Solution>
+  </Solutions>
+  <XamlWorkflows />
+  <DataProviders />
+</Register>

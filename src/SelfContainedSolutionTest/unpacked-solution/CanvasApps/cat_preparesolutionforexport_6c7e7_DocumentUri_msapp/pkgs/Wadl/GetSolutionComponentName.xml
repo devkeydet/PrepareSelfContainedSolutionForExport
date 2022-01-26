@@ -1,16 +1,20 @@
-<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="RemoveEnvironmentVariableCurrentValues" xmlns="http://wadl.dev.java.net/2009/02">
-  <doc title="RemoveEnvironmentVariableCurrentValues" />
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="GetSolutionComponentName" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="GetSolutionComponentName" />
   <grammars>
     <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
       <string name="ManualTriggerInput_text_def" />
-      <string name="ManualTriggerInput_text_1_def" />
       <object name="ManualTriggerInput">
         <property name="text" type="string" />
-        <property name="text_1" type="string" />
       </object>
-      <string name="ResponseActionOutput_response_def" />
+      <string name="ResponseActionOutput_msdyn_objectid_def" />
+      <string name="ResponseActionOutput_msdyn_displayname_def" />
+      <string name="ResponseActionOutput_msdyn_solutionid_def" />
+      <integer name="ResponseActionOutput_msdyn_componenttype_def" />
       <object name="ResponseActionOutput">
-        <property name="response" type="string" />
+        <property name="msdyn_objectid" type="string" />
+        <property name="msdyn_displayname" type="string" />
+        <property name="msdyn_solutionid" type="string" />
+        <property name="msdyn_componenttype" type="integer" />
       </object>
       <object name="Run_responses_default_def" />
     </jsonTypes>
@@ -26,10 +30,7 @@
           </param>
           <representation mediaType="application/json">
             <param style="plain" name="text" path="/text" type="xs:string" required="true">
-              <doc title="SolutionUniqueName" />
-            </param>
-            <param style="plain" name="text_1" path="/text_1" type="xs:string" required="true">
-              <doc title="SolutionId" />
+              <doc title="msdyn_objectid" />
             </param>
           </representation>
         </request>

@@ -560,7 +560,7 @@
       {
         "AFDDataSourceName": "",
         "AutoRuleBindingEnabled": false,
-        "AutoRuleBindingString": "CustomGallerySample",
+        "AutoRuleBindingString": "",
         "InvariantPropertyName": "Items",
         "IsLockable": false,
         "NameMapSourceSchema": "?"
@@ -587,7 +587,15 @@
       "Y",
       "Width",
       "Height",
-      "ZIndex"
+      "ZIndex",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "true",
+        "InvariantPropertyName": "Visible",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      }
     ],
     "GalleryTemplateChildName": "galleryTemplate1",
     "HasDynamicProperties": false,
@@ -722,6 +730,11 @@
         "Category": "Design",
         "PropertyName": "LoadingSpinnerColor",
         "RuleProviderType": "Unknown"
+      },
+      {
+        "Category": "Design",
+        "PropertyName": "Visible",
+        "RuleProviderType": "Unknown"
       }
     ],
     "StyleName": "defaultGalleryStyle",
@@ -749,8 +762,22 @@
       "ImageRotation",
       "X",
       "Y",
-      "Width",
-      "Height",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Width",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Height",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
       "Fill",
       "DisabledFill",
       "PressedFill",
@@ -792,7 +819,7 @@
     "LayoutName": "",
     "MetaDataIDKey": "",
     "Name": "imgFindDuplicatesInUnmanagedSolution",
-    "ParentIndex": 2,
+    "ParentIndex": 1,
     "PersistMetaDataIDKey": false,
     "Properties": [
       {
@@ -971,8 +998,22 @@
       "ImageRotation",
       "X",
       "Y",
-      "Width",
-      "Height",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Width",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Height",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
       "Fill",
       "DisabledFill",
       "PressedFill",
@@ -1239,7 +1280,7 @@
     "LayoutName": "",
     "MetaDataIDKey": "",
     "Name": "lblCheckOtherUnmanaged",
-    "ParentIndex": 1,
+    "ParentIndex": 2,
     "PersistMetaDataIDKey": false,
     "Properties": [
       {
@@ -2400,7 +2441,14 @@
     "ControlPropertyState": [
       "Live",
       "Overflow",
-      "Text",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "ThisItem.'Created On'",
+        "InvariantPropertyName": "Text",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
       "Role",
       "Color",
       "DisabledColor",
@@ -2625,7 +2673,14 @@
     "ControlPropertyState": [
       "Live",
       "Overflow",
-      "Text",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "ThisItem.'Object Type Code'",
+        "InvariantPropertyName": "Text",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
       "Role",
       "Color",
       "DisabledColor",

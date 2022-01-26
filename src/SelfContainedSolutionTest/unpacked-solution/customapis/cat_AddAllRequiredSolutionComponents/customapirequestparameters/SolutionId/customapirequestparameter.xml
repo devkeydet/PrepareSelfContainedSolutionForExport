@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="SolutionId">
+  <description default="AddAllRequiredSolutionComponents.SolutionId">
+    <label description="AddAllRequiredSolutionComponents.SolutionId" languagecode="1033" />
+  </description>
+  <displayname default="AddAllRequiredSolutionComponents.SolutionId">
+    <label description="AddAllRequiredSolutionComponents.SolutionId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>AddAllRequiredSolutionComponents.SolutionId</name>
+  <type>12</type>
+</customapirequestparameter>

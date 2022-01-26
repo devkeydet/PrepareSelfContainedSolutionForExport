@@ -1,0 +1,18 @@
+<customapi uniquename="cat_FindDuplicatesInUnmanagedSolutions">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="FindDuplicatesInUnmanagedSolutions">
+    <label description="FindDuplicatesInUnmanagedSolutions" languagecode="1033" />
+  </description>
+  <displayname default="FindDuplicatesInUnmanagedSolutions">
+    <label description="FindDuplicatesInUnmanagedSolutions" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>FindDuplicatesInUnmanagedSolutions</name>
+  <plugintypeid>
+    <plugintypeid>dd05a51d-45b6-4e3a-866e-fcdff3dd4a86</plugintypeid>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

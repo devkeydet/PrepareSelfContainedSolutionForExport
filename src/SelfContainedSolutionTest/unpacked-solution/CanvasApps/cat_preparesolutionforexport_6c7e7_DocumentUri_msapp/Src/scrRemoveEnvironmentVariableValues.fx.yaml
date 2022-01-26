@@ -1,35 +1,31 @@
 scrRemoveEnvironmentVariableValues As screen:
 
+    imgRemoveEnvironmentVariableCurrentValuesRunning As image:
+        Image: =imgLoading
+        ImagePosition: =ImagePosition.Fill
+        Visible: =loading
+        X: =215
+        Y: =50
+        ZIndex: =1
+
     lblRemoveEnvironmentVariableCurrentValues As label:
         Text: ="Do you want to remove Envirnonment Variable current values?"
         Width: =700
         X: =40
         Y: =40
-        ZIndex: =1
+        ZIndex: =2
 
     btnRemoveEnvironmentVariableCurrentValues As button:
         OnSelect: |-
             =UpdateContext({loading: true});
             If(
-                RemoveEnvironmentVariableCurrentValues.Run(
-                    drpSolutions.Selected.Name,
-                    drpSolutions.Selected.'Solution Identifier'
-                ).response = "success",
+                AddAllRequiredComponentsUsingCustomAPI.Run(drpSolutions.Selected.'Solution Identifier'
+                ).result = "success",
                 Navigate(scrCheckForComponentsInOtherSolutions)
             );
             UpdateContext({loading: false});
         Text: ="Yes"
         X: =40
-        Y: =80
-        ZIndex: =2
-
-    imgRemoveEnvironmentVariableCurrentValuesRunning As image:
-        Height: =41
-        Image: =imgLoading
-        ImagePosition: =ImagePosition.Fill
-        Visible: =loading
-        Width: =45
-        X: =213
         Y: =80
         ZIndex: =3
 

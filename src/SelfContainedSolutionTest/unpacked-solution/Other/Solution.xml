@@ -7,7 +7,7 @@
     </LocalizedNames>
     <Descriptions />
     <Version>1.0.0.1</Version>
-    <Managed>0</Managed>
+    <Managed>2</Managed>
     <Publisher>
       <UniqueName>cat</UniqueName>
       <LocalizedNames>
@@ -78,11 +78,17 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="29" id="{0660740f-c37d-ec11-8d21-0022482a3935}" behavior="0" />
       <RootComponent type="29" id="{133ce52f-c47b-ec11-8d21-00224829f478}" behavior="0" />
       <RootComponent type="29" id="{328c5067-867b-ec11-8d21-00224829f478}" behavior="0" />
+      <RootComponent type="29" id="{516bbda1-517d-ec11-8d21-0022482a31f8}" behavior="0" />
       <RootComponent type="29" id="{564932b8-4e7c-ec11-8d21-0022482a31f8}" behavior="0" />
+      <RootComponent type="29" id="{75debc36-827d-ec11-8d21-0022482a31f8}" behavior="0" />
       <RootComponent type="29" id="{8c3b1fa9-937b-ec11-8d21-00224829f478}" behavior="0" />
       <RootComponent type="29" id="{ac2fd599-9c7b-ec11-8d21-00224829febb}" behavior="0" />
+      <RootComponent type="91" id="{0d938548-626c-4dc8-8aab-08e6dad8ba92}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" behavior="0" />
+      <RootComponent type="92" id="{4e3dd8c5-717d-ec11-8d21-0022482a31f8}" behavior="0" />
+      <RootComponent type="92" id="{dec8d1fc-717d-ec11-8d21-0022482a31f8}" behavior="0" />
       <RootComponent type="300" schemaName="cat_preparesolutionforexport_6c7e7" behavior="0" />
     </RootComponents>
     <MissingDependencies />
