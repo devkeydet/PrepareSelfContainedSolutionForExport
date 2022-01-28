@@ -1,6 +1,6 @@
 ﻿using FakeItEasy;
 using Microsoft.Xrm.Sdk;
-using SelfContainedSolutionTest.Plugins;
+using SelfContainedSolutionTest.Plugins.EarlyBound;
 using System;
 
 namespace Plugins.Tests
@@ -10,10 +10,10 @@ namespace Plugins.Tests
         internal void SetupPluginFakes(IServiceProvider fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext)
         {
             fakePluginExecutionContext = A.Fake<IPluginExecutionContext>();
-            var fakeExecutionContext = A.Fake<IExecutionContext>();
-            var fakeTracingService = A.Fake<ITracingService>();
-            var fakeServiceEndpointNotificationService = A.Fake<IServiceEndpointNotificationService>();
-            var fakeOrganizationServiceFactory = A.Fake<IOrganizationServiceFactory>();
+            IExecutionContext fakeExecutionContext = A.Fake<IExecutionContext>();
+            ITracingService fakeTracingService = A.Fake<ITracingService>();
+            IServiceEndpointNotificationService fakeServiceEndpointNotificationService = A.Fake<IServiceEndpointNotificationService>();
+            IOrganizationServiceFactory fakeOrganizationServiceFactory = A.Fake<IOrganizationServiceFactory>();
             fakeEarlyBoundContext = A.Fake<IEarlyBoundContext>();
 
             A.CallTo(

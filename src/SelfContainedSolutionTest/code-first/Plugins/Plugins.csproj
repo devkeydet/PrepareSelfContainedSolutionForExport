@@ -73,16 +73,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomAPIs\Example.cs" />
-    <Compile Include="IEarlyBoundContext.cs" />
+    <Compile Include="EarlyBound\IEarlyBoundContext.cs" />
     <Compile Include="CustomAPIs\RemoveComponentsFromUnmanagedSolutions.cs" />
+    <Compile Include="Base\ILocalPluginContext.cs" />
+    <Compile Include="Base\LocalPluginContext.cs" />
+    <Compile Include="Base\LocalTracingService.cs" />
     <Compile Include="TableControllers\SolutionComponentController.cs" />
-    <Compile Include="EarlyBoundContext.cs" />
+    <Compile Include="EarlyBound\EarlyBoundContext.cs" />
     <Compile Include="CustomAPIs\AddAllRequiredSolutionComponents.cs" />
     <Compile Include="TablePlugins\PreValidationAccountCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PluginBase.cs" />
-    <Compile Include="Models\Solution.cs" />
-    <Compile Include="Models\SolutionComponent.cs" />
+    <Compile Include="Base\PluginBase.cs" />
+    <Compile Include="EarlyBound\Solution.cs" />
+    <Compile Include="EarlyBound\SolutionComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

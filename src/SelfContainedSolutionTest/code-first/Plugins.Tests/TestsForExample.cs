@@ -2,9 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xrm.Sdk;
 using MockQueryable.FakeItEasy;
-using SelfContainedSolutionTest.Plugins;
 using SelfContainedSolutionTest.Plugins.CustomAPIs;
-using SelfContainedSolutionTest.Plugins.Models;
+using SelfContainedSolutionTest.Plugins.EarlyBound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +14,13 @@ namespace Plugins.Tests
     public class TestsForExample : PluginTestBase
     {
         [TestMethod]
-        public void TestExecute()
+        public void TestExecuteForHappyPath()
         {
             // Arrange
-            var fakeServiceProvider = A.Fake<IServiceProvider>();
+            IServiceProvider fakeServiceProvider = A.Fake<IServiceProvider>();
             SetupPluginFakes(fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext);
 
-            var solutionComponents = new List<SolutionComponent>
+            List<SolutionComponent> solutionComponents = new List<SolutionComponent>
             {
                 new SolutionComponent
                 {
@@ -55,16 +54,42 @@ namespace Plugins.Tests
                 }
             };
 
-            var mock = solutionComponents.AsQueryable().BuildMock();
+            IQueryable<SolutionComponent> mock = solutionComponents.AsQueryable().BuildMock();
             A.CallTo(() => fakeEarlyBoundContext.SolutionComponentSet).Returns(mock);
 
             // Act
-            var plugin = new Example();
+            Example plugin = new Example();
             plugin.ExecuteForTesting(fakeServiceProvider, fakeEarlyBoundContext);
 
             //Assert
-            var entityCollection = (EntityCollection)fakePluginExecutionContext.OutputParameters["Test"];
+            EntityCollection entityCollection = (EntityCollection)fakePluginExecutionContext.OutputParameters["Test"];
             Assert.AreEqual(5, entityCollection.Entities.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidPluginExecutionException))]
+        public void TestExecuteForNullServiceProvider()
+        {
+            // Arrange
+
+            // Act
+            Example plugin = new Example();
+            plugin.Execute(null);
+
+            //Assert
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidPluginExecutionException))]
+        public void TestExecuteForNullLEarlyBoundContext()
+        {
+            // Arrange
+            IServiceProvider fakeServiceProvider = A.Fake<IServiceProvider>();
+            SetupPluginFakes(fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext);
+
+            // Act
+            Example plugin = new Example();
+            plugin.ExecuteForTesting(fakeServiceProvider, null);
         }
     }
 }

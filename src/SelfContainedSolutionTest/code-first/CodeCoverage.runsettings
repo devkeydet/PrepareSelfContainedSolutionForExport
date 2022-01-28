@@ -12,8 +12,11 @@
 						</ModulePaths>
 						<Functions>
 							<Exclude>
-								<!-- Exclude methods in a class or namespace named UnitTest: -->
-								<Function>.*\.Models\..*</Function>
+								<!-- Exclude namespaces -->
+								<Function>^SelfContainedSolutionTest.Plugins.EarlyBound\..*</Function>
+								<Function>^SelfContainedSolutionTest.Plugins.Base\..*</Function>
+								<!-- Code Generated, don't need to test-->
+								<Function>^Plugins.Tests\..*</Function>
 							</Exclude>
 						</Functions>
 						<UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>

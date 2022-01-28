@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
-using SelfContainedSolutionTest.Plugins.Models;
 using System;
 using System.Linq;
 
-namespace SelfContainedSolutionTest.Plugins
+namespace SelfContainedSolutionTest.Plugins.EarlyBound
 {
     public interface IEarlyBoundContext
     {
@@ -11,6 +10,7 @@ namespace SelfContainedSolutionTest.Plugins
         IQueryable<Solution> SolutionSet { get; }
 
         void AddSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName);
+
         void RemoveSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName);
     }
 }
