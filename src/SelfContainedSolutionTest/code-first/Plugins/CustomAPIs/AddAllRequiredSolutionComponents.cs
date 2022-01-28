@@ -13,7 +13,6 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
         public AddAllRequiredSolutionComponents()
                 : base(typeof(AddAllRequiredSolutionComponents))
         {
-
             // TODO: Implement your custom configuration handling.
         }
 
@@ -38,14 +37,12 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
                 var solutionId = (Guid)context.InputParameters["SolutionId"];
                 var removeEnvironmentVariableCurrentValues = (bool)context.InputParameters["RemoveEnvironmentVariableCurrentValues"];
 
-                var ctx = new DataverseContext(currentUserService);
-
-
+                var earlyBoundContext = _earlyBoundContext ?? new EarlyBoundContext(currentUserService);
 
                 List<SolutionComponent> solutionComponents = new List<SolutionComponent>();
                 var previousSolutionComponentCount = 0;
                 var currentSolutionComponentCount = -1;
-                var solutionUniqueName = ctx.SolutionSet.Where(s => s.SolutionId == solutionId).FirstOrDefault().UniqueName;
+                var solutionUniqueName = earlyBoundContext.SolutionSet.Where(s => s.SolutionId == solutionId).FirstOrDefault().UniqueName;
 
                 while (currentSolutionComponentCount != previousSolutionComponentCount)
                 {
@@ -54,12 +51,12 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
                         previousSolutionComponentCount = currentSolutionComponentCount;
                     }
 
-                    solutionComponents = SolutionComponentController.GetSolutionComponents(ctx, solutionId);
+                    solutionComponents = SolutionComponentController.GetSolutionComponents(earlyBoundContext, solutionId);
                     currentSolutionComponentCount = solutionComponents.Count;
 
                     foreach (var solutionComponent in solutionComponents)
                     {
-                        ctx.AddSolutionComponent(solutionComponent.ObjectId, solutionComponent.ComponentType, solutionUniqueName);
+                        earlyBoundContext.AddSolutionComponent(solutionComponent.ObjectId, solutionComponent.ComponentType, solutionUniqueName);
                     }
                 }
 
@@ -69,7 +66,7 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
                 {
                     foreach (var environmentVariablCurrentValue in environmentVariableCurrentValues)
                     {
-                        ctx.RemoveSolutionComponent(environmentVariablCurrentValue.ObjectId, environmentVariablCurrentValue.ComponentType, solutionUniqueName);
+                        earlyBoundContext.RemoveSolutionComponent(environmentVariablCurrentValue.ObjectId, environmentVariablCurrentValue.ComponentType, solutionUniqueName);
                     }
                 }
             }
@@ -79,6 +76,6 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
                 tracingService?.Trace("An error occurred executing Plugin SelfContainedSolutionTest.Plugins.AddAllRequiredSolutionComponents : {0}", ex.ToString());
                 throw new InvalidPluginExecutionException("An error occurred executing Plugin SelfContainedSolutionTest.Plugins.AddAllRequiredSolutionComponents .", ex);
             }
-        }        
+        }
     }
 }

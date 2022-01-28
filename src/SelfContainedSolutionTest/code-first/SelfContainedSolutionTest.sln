@@ -10,6 +10,13 @@ Project("{88A30576-7583-4F75-8136-5EFD2C14ADFF}") = "CrmPackage", "CrmPackage\Cr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins\Plugins.csproj", "{BFC0A6AE-8414-40F4-8EED-67C324494727}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Tests", "Plugins.Tests\Plugins.Tests.csproj", "{32D8F283-4D17-48DA-9A51-FFB337DDF350}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E718E34C-39A2-4664-8C49-274743244F26}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +33,10 @@ Global
 		{BFC0A6AE-8414-40F4-8EED-67C324494727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFC0A6AE-8414-40F4-8EED-67C324494727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFC0A6AE-8414-40F4-8EED-67C324494727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D8F283-4D17-48DA-9A51-FFB337DDF350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D8F283-4D17-48DA-9A51-FFB337DDF350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D8F283-4D17-48DA-9A51-FFB337DDF350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D8F283-4D17-48DA-9A51-FFB337DDF350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

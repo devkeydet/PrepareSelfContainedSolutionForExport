@@ -10,9 +10,7 @@
 // </auto-generated>
 using Microsoft.Xrm.Sdk;
 using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 
 namespace SelfContainedSolutionTest.Plugins
@@ -24,6 +22,8 @@ namespace SelfContainedSolutionTest.Plugins
     /// </summary>    
     public abstract class PluginBase : IPlugin
     {
+        internal IEarlyBoundContext _earlyBoundContext;
+
         /// <summary>
         /// Gets or sets the name of the plugin class.
         /// </summary>
@@ -39,6 +39,13 @@ namespace SelfContainedSolutionTest.Plugins
         internal PluginBase(Type pluginClassName)
         {
             PluginClassName = pluginClassName.ToString();
+        }
+
+        [ExcludeFromCodeCoverage]
+        public void ExecuteForTesting(IServiceProvider serviceProvider, IEarlyBoundContext earlyBoundContext)
+        {
+            _earlyBoundContext = earlyBoundContext;
+            Execute(serviceProvider);
         }
 
         /// <summary>
@@ -159,6 +166,8 @@ namespace SelfContainedSolutionTest.Plugins
         /// </summary>
         public ITracingService TracingService { get; private set; }
 
+        public IEarlyBoundContext DataverseEarlyBoundContext { get; private set; }
+
         /// <summary>
         /// Helper object that stores the services available in this plug-in.
         /// </summary>
@@ -187,7 +196,6 @@ namespace SelfContainedSolutionTest.Plugins
 
             // Use the factory to generate the organization service.
             SystemUserService = factory.CreateOrganizationService(null);
-
         }
 
         /// <summary>

@@ -72,11 +72,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomAPIs\FindDuplicatesInUnmanagedSolutions.cs" />
-    <Compile Include="Models\SolutionComponentWithSolutionDetails.cs" />
+    <Compile Include="CustomAPIs\Example.cs" />
+    <Compile Include="IEarlyBoundContext.cs" />
+    <Compile Include="CustomAPIs\RemoveComponentsFromUnmanagedSolutions.cs" />
     <Compile Include="TableControllers\SolutionComponentController.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="DataverseContext.cs" />
+    <Compile Include="EarlyBoundContext.cs" />
     <Compile Include="CustomAPIs\AddAllRequiredSolutionComponents.cs" />
     <Compile Include="TablePlugins\PreValidationAccountCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

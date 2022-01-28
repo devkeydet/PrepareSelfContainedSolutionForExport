@@ -7,7 +7,7 @@ namespace SelfContainedSolutionTest.Plugins.TableControllers
 {
     internal static class SolutionComponentController
     {
-        internal static List<SolutionComponent> GetSolutionComponents(DataverseContext ctx, Guid solutionId)
+        internal static List<SolutionComponent> GetSolutionComponents(IEarlyBoundContext ctx, Guid solutionId)
         {
             var query =
                 from sc in ctx.SolutionComponentSet
