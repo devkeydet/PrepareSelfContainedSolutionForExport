@@ -11,7 +11,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.1
         with:
           fileName: SelfContainedSolutionTest.snk
-          fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins/SelfContainedSolutionTest
+          fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins
           encodedString: ${{ secrets.SNK }}
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
