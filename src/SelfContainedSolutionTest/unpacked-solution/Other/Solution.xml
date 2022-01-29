@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.21114.136" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.21122.157" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>SelfContainedSolutionTest</UniqueName>
     <LocalizedNames>
@@ -87,8 +87,6 @@
       <RootComponent type="29" id="{8c3b1fa9-937b-ec11-8d21-00224829f478}" behavior="0" />
       <RootComponent type="29" id="{ac2fd599-9c7b-ec11-8d21-00224829febb}" behavior="0" />
       <RootComponent type="91" id="{0d938548-626c-4dc8-8aab-08e6dad8ba92}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" behavior="0" />
-      <RootComponent type="92" id="{4e3dd8c5-717d-ec11-8d21-0022482a31f8}" behavior="0" />
-      <RootComponent type="92" id="{dec8d1fc-717d-ec11-8d21-0022482a31f8}" behavior="0" />
       <RootComponent type="300" schemaName="cat_preparesolutionforexport_6c7e7" behavior="0" />
     </RootComponents>
     <MissingDependencies />

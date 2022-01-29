@@ -28,7 +28,7 @@
                   "actionName": "RemoveSolutionComponent",
                   "item/ComponentType": "@items('ApplyToEachSolutionComponent')['componenttype']",
                   "item/SolutionComponent/solutioncomponentid": "@items('ApplyToEachSolutionComponent')['objectid']",
-                  "item/SolutionUniqueName": "@items('ApplyToEachSolutionComponent')['solutionUniqueName']"
+                  "item/SolutionUniqueName": "@items('ApplyToEachSolutionComponent')['solutionuniquename']"
                 }
               },
               "metadata": {
@@ -96,22 +96,18 @@
                   "objectid": {
                     "type": "string"
                   },
-                  "solutionId": {
-                    "type": "string"
-                  },
-                  "solutionUniqueName": {
-                    "type": "string"
-                  },
                   "solutioncomponentid": {
+                    "type": "string"
+                  },
+                  "solutionuniquename": {
                     "type": "string"
                   }
                 },
                 "required": [
                   "componenttype",
                   "objectid",
-                  "solutionId",
-                  "solutionUniqueName",
-                  "solutioncomponentid"
+                  "solutioncomponentid",
+                  "solutionuniquename"
                 ],
                 "type": "object"
               },

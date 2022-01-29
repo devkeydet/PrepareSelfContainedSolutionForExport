@@ -1,8 +1,0 @@
-<customapiresponseproperty uniquename="Solutions">
-  <displayname default="FindDuplicatesInUnmanagedSolutions">
-    <label description="FindDuplicatesInUnmanagedSolutions" languagecode="1033" />
-  </displayname>
-  <iscustomizable>0</iscustomizable>
-  <name>FindDuplicatesInUnmanagedSolutions</name>
-  <type>4</type>
-</customapiresponseproperty>

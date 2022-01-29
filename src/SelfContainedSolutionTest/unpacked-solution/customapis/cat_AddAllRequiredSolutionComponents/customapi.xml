@@ -1,16 +1,16 @@
 <customapi uniquename="cat_AddAllRequiredSolutionComponents">
   <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
   <bindingtype>0</bindingtype>
-  <description default="AddAllRequiredSolutionComponents">
-    <label description="AddAllRequiredSolutionComponents" languagecode="1033" />
+  <description default="cat_AddAllRequiredSolutionComponents">
+    <label description="cat_AddAllRequiredSolutionComponents" languagecode="1033" />
   </description>
-  <displayname default="AddAllRequiredSolutionComponents">
-    <label description="AddAllRequiredSolutionComponents" languagecode="1033" />
+  <displayname default="cat_AddAllRequiredSolutionComponents">
+    <label description="cat_AddAllRequiredSolutionComponents" languagecode="1033" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>
   <isprivate>0</isprivate>
-  <name>AddAllRequiredSolutionComponents</name>
+  <name>cat_AddAllRequiredSolutionComponents</name>
   <plugintypeid>
     <plugintypeid>60b304b5-e3fa-4c88-b9d6-0ffde6a2fe60</plugintypeid>
   </plugintypeid>
