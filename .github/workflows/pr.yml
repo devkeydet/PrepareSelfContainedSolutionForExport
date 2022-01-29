@@ -10,9 +10,9 @@ jobs:
       - name: base64-to-file
         uses: timheuer/base64-to-file@v1.1
         with:
-          fileName: SelfContainedSolutionTest.pfx
-          fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins/SelfContainedSolutionTest.pfx
-          encodedString: ${{ secrets.PFX }}
+          fileName: SelfContainedSolutionTest.snk
+          fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins/SelfContainedSolutionTest
+          encodedString: ${{ secrets.SNK }}
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Setup NuGet.exe for use with actions
@@ -22,6 +22,5 @@ jobs:
           nuget restore ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln
       - name: Build Solution
         run: |
-          dir *.pfx
           msbuild.exe ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln /p:configuration="Release"
 

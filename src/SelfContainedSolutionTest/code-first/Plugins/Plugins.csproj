@@ -52,7 +52,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>SelfContainedSolutionTest.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SelfContainedSolutionTest.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -91,7 +91,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="SelfContainedSolutionTest.pfx" />
+    <None Include="SelfContainedSolutionTest.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">

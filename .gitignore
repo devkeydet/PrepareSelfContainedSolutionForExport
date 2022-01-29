@@ -355,3 +355,4 @@ pack-temp/
 src/GitHubCanvasApp/
 
 *.dll
+*.snk
