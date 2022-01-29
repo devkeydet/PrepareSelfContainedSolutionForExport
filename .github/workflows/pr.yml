@@ -45,5 +45,12 @@ jobs:
         with:
           reports: reports/test.coverage
           targetdir: reports
+          reporttypes: lcov
+      - uses: devmasx/coverage-check-action@v1.2.0
+        with:
+          type: lcov
+          result_path: report/test.lcov
+          min_coverage: 90
+          token: ${{ github.token }}
 
 
