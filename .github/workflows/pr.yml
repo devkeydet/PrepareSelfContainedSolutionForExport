@@ -1,7 +1,7 @@
 name: pr
 on: push
 env:
-  SOLUTION_PATH: ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest
+  SOLUTION_PATH: ./src/SelfContainedSolutionTest/code-first
 jobs:
   main:
     runs-on: windows-latest
@@ -23,11 +23,11 @@ jobs:
         uses: darenm/Setup-VSTest@v1
       - name: Restore Packages
         run: |
-          nuget restore ${{ env.SOLUTION_PATH }}.sln
+          nuget restore ${{ env.SOLUTION_PATH }}/SelfContainedSolutionTest.sln
       - name: Build Visual Studio Solution
         run: |
-          msbuild.exe ${{ env.SOLUTION_PATH }}.sln /p:configuration="Release"
-      - name: T Solution
+          msbuild.exe ${{ env.SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
+      - name: Run Unit Tests
         run: |
           vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll
 
