@@ -87,6 +87,7 @@
       <RootComponent type="29" id="{8c3b1fa9-937b-ec11-8d21-00224829f478}" behavior="0" />
       <RootComponent type="29" id="{ac2fd599-9c7b-ec11-8d21-00224829febb}" behavior="0" />
       <RootComponent type="91" id="{0d938548-626c-4dc8-8aab-08e6dad8ba92}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" behavior="0" />
+      <RootComponent type="91" id="{d58cffd5-2b0a-4c29-bf16-9247ecd1d13e}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5d5ceb43ae8718fb" behavior="0" />
       <RootComponent type="300" schemaName="cat_preparesolutionforexport_6c7e7" behavior="0" />
     </RootComponents>
     <MissingDependencies />
