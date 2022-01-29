@@ -48,7 +48,7 @@ jobs:
           reporttypes: Cobertura
       - uses: 5monkeys/cobertura-action@master
         with:
-          path: src/test.xml
-          minimum_coverage: 95
+          path: reports/Cobertura.xml
+          minimum_coverage: 100
 
 
