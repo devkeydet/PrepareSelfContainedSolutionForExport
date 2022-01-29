@@ -9,7 +9,7 @@ namespace SelfContainedSolutionTest.Plugins.TableControllers
     {
         internal static List<SolutionComponent> GetSolutionComponents(IEarlyBoundContext ctx, Guid solutionId)
         {
-            IQueryable<SolutionComponent> query =
+            var query =
                 from sc in ctx.SolutionComponentSet
                 where sc.SolutionId.Id == solutionId
                 select new SolutionComponent

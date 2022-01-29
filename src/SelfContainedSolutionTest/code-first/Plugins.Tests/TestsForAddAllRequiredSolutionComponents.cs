@@ -17,10 +17,10 @@ namespace Plugins.Tests
         public void TestExecute()
         {
             // Arrange
-            IServiceProvider fakeServiceProvider = A.Fake<IServiceProvider>();
-            SetupPluginFakes(fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext);
+            var fakeServiceProvider = A.Fake<IServiceProvider>();
+            SetupPluginFakes(fakeServiceProvider, out var fakePluginExecutionContext, out var fakeEarlyBoundContext);
 
-            List<Solution> solutions = new List<Solution>
+            var solutions = new List<Solution>
             {
                 new Solution
                 {
@@ -29,12 +29,12 @@ namespace Plugins.Tests
                 }
             };
 
-            IQueryable<Solution> solutionSetMock = solutions.AsQueryable().BuildMock();
+            var solutionSetMock = solutions.AsQueryable().BuildMock();
             A.CallTo(
                 () => fakeEarlyBoundContext.SolutionSet
             ).Returns(solutionSetMock);
 
-            List<SolutionComponent> solutionComponents = new List<SolutionComponent>
+            var solutionComponents = new List<SolutionComponent>
             {
                 new SolutionComponent
                 {
@@ -68,12 +68,12 @@ namespace Plugins.Tests
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
-                    ComponentType = new OptionSetValue(1),
+                    ComponentType = new OptionSetValue(381),
                     SolutionId = new EntityReference("solution", solutions[0].Id)
                 }
             };
 
-            IQueryable<SolutionComponent> solutionComponentsSetMock = solutionComponents.AsQueryable().BuildMock();
+            var solutionComponentsSetMock = solutionComponents.AsQueryable().BuildMock();
             A.CallTo(
                 () => fakeEarlyBoundContext.SolutionComponentSet
             ).Returns(solutionComponentsSetMock);
@@ -82,8 +82,8 @@ namespace Plugins.Tests
             fakePluginExecutionContext.InputParameters["RemoveEnvironmentVariableCurrentValues"] = true;
 
             // Act
-            AddAllRequiredSolutionComponents plugin = new AddAllRequiredSolutionComponents();
-            plugin.ExecuteForTesting(fakeServiceProvider, fakeEarlyBoundContext);
+            var plugin = new AddAllRequiredSolutionComponents(fakeEarlyBoundContext);
+            plugin.Execute(fakeServiceProvider);
 
             //Assert
             A.CallTo(

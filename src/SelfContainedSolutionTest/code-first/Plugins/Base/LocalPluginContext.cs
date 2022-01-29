@@ -63,7 +63,7 @@ namespace SelfContainedSolutionTest.Plugins.Base
             NotificationService = (IServiceEndpointNotificationService)serviceProvider.GetService(typeof(IServiceEndpointNotificationService));
 
             // Obtain the organization factory service from the service provider.
-            IOrganizationServiceFactory factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+            var factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
 
             // Use the factory to generate the organization service.
             CurrentUserService = factory.CreateOrganizationService(PluginExecutionContext.UserId);

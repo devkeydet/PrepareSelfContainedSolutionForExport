@@ -24,7 +24,8 @@ namespace SelfContainedSolutionTest.Plugins.Base
     /// </summary>    
     public abstract class PluginBase : IPlugin
     {
-        internal IEarlyBoundContext _earlyBoundContext;
+        private LocalPluginContext _localPluginContext;
+        private IEarlyBoundContext _earlyBoundContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PluginBase"/> class.
@@ -36,12 +37,20 @@ namespace SelfContainedSolutionTest.Plugins.Base
             PluginClassName = pluginClassName.ToString();
         }
 
+        public PluginBase(Type pluginClassName, IEarlyBoundContext earlyBoundContext)
+        {
+            PluginClassName = pluginClassName.ToString();
+            _earlyBoundContext = earlyBoundContext;
+        }
+
         /// <summary>
         /// Gets or sets the name of the plugin class.
         /// </summary>
         /// <value>The name of the child class.</value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "PluginBase")]
         protected string PluginClassName { get; private set; }
+        internal IEarlyBoundContext EarlyBoundContext { get => _earlyBoundContext; }
+
         /// <summary>
         /// Main entry point for he business logic that the plug-in is to execute.
         /// </summary>
@@ -62,16 +71,18 @@ namespace SelfContainedSolutionTest.Plugins.Base
             }
 
             // Construct the local plug-in context.
-            var localPluginContext = new LocalPluginContext(serviceProvider);
+            _localPluginContext = new LocalPluginContext(serviceProvider);
 
-            localPluginContext.Trace($"Entered {PluginClassName}.Execute() " +
-                 $"Correlation Id: {localPluginContext.PluginExecutionContext.CorrelationId}, " +
-                 $"Initiating User: {localPluginContext.PluginExecutionContext.InitiatingUserId}");
+            _earlyBoundContext = _earlyBoundContext ?? new EarlyBoundContext(_localPluginContext.CurrentUserService);
+
+            _localPluginContext.Trace($"Entered {PluginClassName}.Execute() " +
+                 $"Correlation Id: {_localPluginContext.PluginExecutionContext.CorrelationId}, " +
+                 $"Initiating User: {_localPluginContext.PluginExecutionContext.InitiatingUserId}");
 
             try
             {
                 // Invoke the custom implementation 
-                ExecuteDataversePlugin(localPluginContext);
+                Execute(_localPluginContext);
 
                 // now exit - if the derived plug-in has incorrectly registered overlapping event registrations,
                 // guard against multiple executions.
@@ -79,33 +90,25 @@ namespace SelfContainedSolutionTest.Plugins.Base
             }
             catch (FaultException<OrganizationServiceFault> orgServiceFault)
             {
-                localPluginContext.Trace($"Exception: {orgServiceFault.ToString()}");
+                _localPluginContext.Trace($"Exception: {orgServiceFault.ToString()}");
 
                 // Handle the exception.
                 throw new InvalidPluginExecutionException($"OrganizationServiceFault: {orgServiceFault.Message}", orgServiceFault);
             }
             finally
             {
-                localPluginContext.Trace($"Exiting {PluginClassName}.Execute()");
+                _localPluginContext.Trace($"Exiting {PluginClassName}.Execute()");
             }
-        }
-
-        [ExcludeFromCodeCoverage]
-        public void ExecuteForTesting(IServiceProvider serviceProvider, IEarlyBoundContext earlyBoundContext)
-        {
-            _earlyBoundContext = earlyBoundContext;
-            Execute(serviceProvider);
         }
         /// <summary>
         /// Placeholder for a custom plug-in implementation. 
         /// </summary>
         /// <param name="localPluginContext">Context for the current plug-in.</param>
-        protected virtual void ExecuteDataversePlugin(ILocalPluginContext localPluginContext)
+        protected virtual void Execute(ILocalPluginContext localPluginContext)
         {
             // Do nothing. 
         }
 
-        [ExcludeFromCodeCoverage]
         public static void ThrowExceptionIfLocalContextIsNullAndObtainTracingService(ILocalPluginContext localContext, out ITracingService tracingService)
         {
             if (localContext == null)
@@ -116,11 +119,29 @@ namespace SelfContainedSolutionTest.Plugins.Base
             tracingService = localContext.TracingService;
         }
 
-        [ExcludeFromCodeCoverage]
         public static void TraceAndThrow(ITracingService tracingService, Exception ex, string pluginName)
         {
             tracingService?.Trace($"An error occurred executing Plugin {pluginName} : {ex}");
             throw new InvalidPluginExecutionException($"An error occurred executing Plugin {pluginName}.", ex);
+        }
+
+        internal void Execute(Action action)//, ILocalPluginContext localContext, out ITracingService tracingService)
+        {
+            if (_localPluginContext == null)
+            {
+                throw new InvalidPluginExecutionException(nameof(_localPluginContext));
+            }
+
+            try
+            {
+                action();
+            }
+            // Only throw an InvalidPluginExecutionException. Please Refer https://go.microsoft.com/fwlink/?linkid=2153829.
+            catch (Exception ex)
+            {
+                _localPluginContext.Trace($"An error occurred executing Plugin {PluginClassName} : {ex}");
+                throw new InvalidPluginExecutionException($"An error occurred executing Plugin {PluginClassName}.", ex);
+            }
         }
     }
 }

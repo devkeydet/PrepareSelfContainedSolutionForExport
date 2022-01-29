@@ -17,79 +17,58 @@ namespace Plugins.Tests
         public void TestExecuteForHappyPath()
         {
             // Arrange
-            IServiceProvider fakeServiceProvider = A.Fake<IServiceProvider>();
-            SetupPluginFakes(fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext);
+            var fakeServiceProvider = A.Fake<IServiceProvider>();
+            SetupPluginFakes(fakeServiceProvider, out var fakePluginExecutionContext, out var fakeEarlyBoundContext);
 
-            List<SolutionComponent> solutionComponents = new List<SolutionComponent>
+            var solutionComponents = new List<SolutionComponent>
             {
                 new SolutionComponent
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
                     ComponentType = new OptionSetValue(1),
+                    SolutionId = new EntityReference(Solution.EntityLogicalName, Guid.NewGuid())
                 },
                 new SolutionComponent
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
                     ComponentType = new OptionSetValue(1),
+                    SolutionId = new EntityReference(Solution.EntityLogicalName, Guid.NewGuid())
                 },
                 new SolutionComponent
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
                     ComponentType = new OptionSetValue(1),
+                    SolutionId = new EntityReference(Solution.EntityLogicalName, Guid.NewGuid())
                 },
                 new SolutionComponent
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
                     ComponentType = new OptionSetValue(1),
+                    SolutionId = new EntityReference(Solution.EntityLogicalName, Guid.NewGuid())
                 },
                 new SolutionComponent
                 {
                     Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid(),
                     ComponentType = new OptionSetValue(1),
+                    SolutionId = new EntityReference(Solution.EntityLogicalName, Guid.NewGuid())
                 }
             };
 
-            IQueryable<SolutionComponent> mock = solutionComponents.AsQueryable().BuildMock();
+            var mock = solutionComponents.AsQueryable().BuildMock();
             A.CallTo(() => fakeEarlyBoundContext.SolutionComponentSet).Returns(mock);
 
             // Act
-            Example plugin = new Example();
-            plugin.ExecuteForTesting(fakeServiceProvider, fakeEarlyBoundContext);
+            var plugin = new Example(fakeEarlyBoundContext);
+            plugin.Execute(fakeServiceProvider);
 
             //Assert
-            EntityCollection entityCollection = (EntityCollection)fakePluginExecutionContext.OutputParameters["Test"];
+            var entityCollection = (EntityCollection)fakePluginExecutionContext.OutputParameters["Test"];
             Assert.AreEqual(5, entityCollection.Entities.Count);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidPluginExecutionException))]
-        public void TestExecuteForNullServiceProvider()
-        {
-            // Arrange
-
-            // Act
-            Example plugin = new Example();
-            plugin.Execute(null);
-
-            //Assert
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidPluginExecutionException))]
-        public void TestExecuteForNullLEarlyBoundContext()
-        {
-            // Arrange
-            IServiceProvider fakeServiceProvider = A.Fake<IServiceProvider>();
-            SetupPluginFakes(fakeServiceProvider, out IPluginExecutionContext fakePluginExecutionContext, out IEarlyBoundContext fakeEarlyBoundContext);
-
-            // Act
-            Example plugin = new Example();
-            plugin.ExecuteForTesting(fakeServiceProvider, null);
         }
     }
 }

@@ -12,11 +12,11 @@ namespace SelfContainedSolutionTest.Plugins.Base
 
         public LocalTracingService(IServiceProvider serviceProvider)
         {
-            DateTime utcNow = DateTime.UtcNow;
+            var utcNow = DateTime.UtcNow;
 
             var context = (IExecutionContext)serviceProvider.GetService(typeof(IExecutionContext));
 
-            DateTime initialTimestamp = context.OperationCreatedOn;
+            var initialTimestamp = context.OperationCreatedOn;
 
             if (initialTimestamp > utcNow)
             {

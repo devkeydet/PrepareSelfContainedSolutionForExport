@@ -1,43 +1,43 @@
-﻿using Microsoft.Xrm.Sdk;
-using SelfContainedSolutionTest.Plugins.Base;
+﻿using SelfContainedSolutionTest.Plugins.Base;
 using SelfContainedSolutionTest.Plugins.EarlyBound;
 using SelfContainedSolutionTest.Plugins.TableControllers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace SelfContainedSolutionTest.Plugins.CustomAPIs
 {
     public class AddAllRequiredSolutionComponents : PluginBase
     {
+        [ExcludeFromCodeCoverage]
         public AddAllRequiredSolutionComponents()
                 : base(typeof(AddAllRequiredSolutionComponents))
         {
             // TODO: Implement your custom configuration handling.
         }
 
-        protected override void ExecuteDataversePlugin(ILocalPluginContext localContext)
+        public AddAllRequiredSolutionComponents(IEarlyBoundContext earlyBoundContext)
+                : base(typeof(AddAllRequiredSolutionComponents), earlyBoundContext)
         {
-            ThrowExceptionIfLocalContextIsNullAndObtainTracingService(localContext, out ITracingService tracingService);
+            // TODO: Implement your custom configuration handling.
+        }
 
-            try
+        protected override void Execute(ILocalPluginContext localContext)
+        {
+            Execute(() =>
             {
                 // Obtain the execution context from the service provider.
-                IPluginExecutionContext context = localContext.PluginExecutionContext;
-
-                // Obtain the organization service reference for web service calls.
-                IOrganizationService currentUserService = localContext.CurrentUserService;
+                var context = localContext.PluginExecutionContext;
 
                 // Get Custom API request parameters
-                Guid solutionId = (Guid)context.InputParameters["SolutionId"];
-                bool removeEnvironmentVariableCurrentValues = (bool)context.InputParameters["RemoveEnvironmentVariableCurrentValues"];
+                var solutionId = (Guid)context.InputParameters["SolutionId"];
+                var removeEnvironmentVariableCurrentValues = (bool)context.InputParameters["RemoveEnvironmentVariableCurrentValues"];
 
-                IEarlyBoundContext earlyBoundContext = _earlyBoundContext ?? new EarlyBoundContext(currentUserService);
-
-                List<SolutionComponent> solutionComponents = new List<SolutionComponent>();
-                int previousSolutionComponentCount = 0;
-                int currentSolutionComponentCount = -1;
-                string solutionUniqueName = earlyBoundContext.SolutionSet.Where(s => s.SolutionId == solutionId).FirstOrDefault().UniqueName;
+                var solutionComponents = new List<SolutionComponent>();
+                var previousSolutionComponentCount = 0;
+                var currentSolutionComponentCount = -1;
+                var solutionUniqueName = EarlyBoundContext.SolutionSet.Where(s => s.SolutionId == solutionId).FirstOrDefault().UniqueName;
 
                 while (currentSolutionComponentCount != previousSolutionComponentCount)
                 {
@@ -46,30 +46,25 @@ namespace SelfContainedSolutionTest.Plugins.CustomAPIs
                         previousSolutionComponentCount = currentSolutionComponentCount;
                     }
 
-                    solutionComponents = SolutionComponentController.GetSolutionComponents(earlyBoundContext, solutionId);
+                    solutionComponents = SolutionComponentController.GetSolutionComponents(EarlyBoundContext, solutionId);
                     currentSolutionComponentCount = solutionComponents.Count;
 
-                    foreach (SolutionComponent solutionComponent in solutionComponents)
+                    foreach (var solutionComponent in solutionComponents)
                     {
-                        earlyBoundContext.AddSolutionComponent(solutionComponent.ObjectId, solutionComponent.ComponentType, solutionUniqueName);
+                        EarlyBoundContext.AddSolutionComponent(solutionComponent.ObjectId, solutionComponent.ComponentType, solutionUniqueName);
                     }
                 }
 
-                IEnumerable<SolutionComponent> environmentVariableCurrentValues = solutionComponents.Where(sc => sc.ComponentType.Value == 381);
+                var environmentVariableCurrentValues = solutionComponents.Where(sc => sc.ComponentType.Value == 381);
 
                 if (removeEnvironmentVariableCurrentValues)
                 {
-                    foreach (SolutionComponent environmentVariablCurrentValue in environmentVariableCurrentValues)
+                    foreach (var environmentVariablCurrentValue in environmentVariableCurrentValues)
                     {
-                        earlyBoundContext.RemoveSolutionComponent(environmentVariablCurrentValue.ObjectId, environmentVariablCurrentValue.ComponentType, solutionUniqueName);
+                        EarlyBoundContext.RemoveSolutionComponent(environmentVariablCurrentValue.ObjectId, environmentVariablCurrentValue.ComponentType, solutionUniqueName);
                     }
                 }
-            }
-            // Only throw an InvalidPluginExecutionException. Please Refer https://go.microsoft.com/fwlink/?linkid=2153829.
-            catch (Exception ex)
-            {
-                TraceAndThrow(tracingService, ex, this.ToString());
-            }
+            });
         }
     }
 }

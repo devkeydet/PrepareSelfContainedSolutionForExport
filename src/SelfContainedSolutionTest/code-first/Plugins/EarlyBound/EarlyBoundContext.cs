@@ -18,7 +18,7 @@ namespace SelfContainedSolutionTest.Plugins.EarlyBound
 
         public void AddSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName)
         {
-            AddSolutionComponentRequest request = new AddSolutionComponentRequest
+            var request = new AddSolutionComponentRequest
             {
                 AddRequiredComponents = true,
                 ComponentId = (Guid)componentId,
@@ -30,7 +30,7 @@ namespace SelfContainedSolutionTest.Plugins.EarlyBound
 
         public void RemoveSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName)
         {
-            RemoveSolutionComponentRequest request = new RemoveSolutionComponentRequest
+            var request = new RemoveSolutionComponentRequest
             {
                 ComponentId = (Guid)componentId,
                 ComponentType = componentType.Value,
