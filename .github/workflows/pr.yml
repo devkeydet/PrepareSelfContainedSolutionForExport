@@ -45,9 +45,10 @@ jobs:
         with:
           reports: reports/test.coverage
           targetdir: reports
-          reporttypes: lcov
-      - uses: romeovs/lcov-reporter-action@v0.2.16
+          reporttypes: Cobertura
+      - uses: 5monkeys/cobertura-action@master
         with:
-          lcov-file: reports/lcov.info
+          path: src/test.xml
+          minimum_coverage: 95
 
 
