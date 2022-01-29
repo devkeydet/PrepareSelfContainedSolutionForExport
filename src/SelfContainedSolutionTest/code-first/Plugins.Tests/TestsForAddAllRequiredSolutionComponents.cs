@@ -88,7 +88,7 @@ namespace Plugins.Tests
             //Assert
             A.CallTo(
                 () => fakeEarlyBoundContext.AddSolutionComponent(A<Guid>.Ignored, A<OptionSetValue>.Ignored, A<string>.Ignored)
-            ).MustHaveHappened();
+            ).MustHaveHappened(10, Times.Exactly);
         }
     }
 }

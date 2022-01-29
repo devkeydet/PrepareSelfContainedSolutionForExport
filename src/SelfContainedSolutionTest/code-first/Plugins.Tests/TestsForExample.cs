@@ -14,7 +14,7 @@ namespace Plugins.Tests
     public class TestsForExample : PluginTestBase
     {
         [TestMethod]
-        public void TestExecuteForHappyPath()
+        public void TestExecute()
         {
             // Arrange
             var fakeServiceProvider = A.Fake<IServiceProvider>();

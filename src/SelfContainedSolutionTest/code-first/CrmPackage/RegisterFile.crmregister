@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Register xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/crm/2011/tools/pluginregistration">
-  <Solutions>
-    <Solution Assembly="SelfContainedSolutionTest.Plugins.dll" Id="0d938548-626c-4dc8-8aab-08e6dad8ba92" IsolationMode="Sandbox" SourceType="Database">
-      <PluginTypes>
-        <clear />
-        <Plugin Description="AddAllRequiredSolutionComponents" FriendlyName="AddAllRequiredSolutionComponents" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents" Id="60b304b5-e3fa-4c88-b9d6-0ffde6a2fe60" TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents" />
-        <Plugin Description="RemoveComponentsFromUnmanagedSolutions" FriendlyName="RemoveComponentsFromUnmanagedSolutions" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions" Id="1431eed4-e2b7-49e0-aae9-9fd913e840b8" TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions" />
-        <Plugin Description="Example" FriendlyName="Example" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.Example" Id="b4b23fb7-459a-4e7d-b2ef-edfd1f7c6fbc" TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.Example" />
-      </PluginTypes>
-    </Solution>
-  </Solutions>
-  <XamlWorkflows />
-  <DataProviders />
+<Register xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		  xmlns="http://schemas.microsoft.com/crm/2011/tools/pluginregistration">
+	<Solutions>
+		<Solution Assembly="SelfContainedSolutionTest.Plugins.dll"
+				  Id="d58cffd5-2b0a-4c29-bf16-9247ecd1d13e"
+				  IsolationMode="Sandbox"
+				  SourceType="Database">
+			<PluginTypes>
+				<clear />
+				<Plugin Description="AddAllRequiredSolutionComponents"
+						FriendlyName="AddAllRequiredSolutionComponents"
+						Name="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents"
+						Id="e6a0304b-1180-45e7-882f-3cc1c25e534c"
+						TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents" />
+				<Plugin Description="RemoveComponentsFromUnmanagedSolutions"
+						FriendlyName="RemoveComponentsFromUnmanagedSolutions"
+						Name="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions"
+						Id="63c573e6-1bb2-4b85-8f1f-5fae6ceaf11f"
+						TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions" />
+				<Plugin Description="Example"
+						FriendlyName="Example"
+						Name="SelfContainedSolutionTest.Plugins.CustomAPIs.Example"
+						Id="bd0dd28d-4e90-4ff0-b025-f6486f5dc40d"
+						TypeName="SelfContainedSolutionTest.Plugins.CustomAPIs.Example" />
+			</PluginTypes>
+		</Solution>
+	</Solutions>
+	<XamlWorkflows />
+	<DataProviders />
 </Register>

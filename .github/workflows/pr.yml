@@ -33,7 +33,7 @@ jobs:
           mkdir reports
           Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
           Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
-      - name: Test Report
+      - name: Report Unit Test Results
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
