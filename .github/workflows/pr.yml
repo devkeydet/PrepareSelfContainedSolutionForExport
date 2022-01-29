@@ -22,5 +22,6 @@ jobs:
           nuget restore ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln
       - name: Build Solution
         run: |
+          dir *.pfx
           msbuild.exe ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln /p:configuration="Release"
 
