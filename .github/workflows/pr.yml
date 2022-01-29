@@ -29,5 +29,5 @@ jobs:
           msbuild.exe ${{ env.SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
       - name: Run Unit Tests
         run: |
-          vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll
+          vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /codeCoverageEnabled:True
 
