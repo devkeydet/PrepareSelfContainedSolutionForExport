@@ -32,13 +32,18 @@ jobs:
           vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
           mkdir reports
           Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
-          Get-ChildItem *.coverage -Recurse
+          Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Unit Tests
+          name: Unit Test Results
           path: reports/test-report.trx
           reporter: dotnet-trx
+      - name: ReportGenerator
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.0.3
+        with:
+          reports: reports/test.coverage
+          targetdir: reports
 
 
