@@ -4,13 +4,15 @@ jobs:
   main:
     runs-on: windows-latest
     steps:
+      - name: git configure long path
+        run: git config --global core.longpaths true
       - uses: actions/checkout@v2
-        with:
-          lfs: true
       - name: base64-to-file
         uses: timheuer/base64-to-file@v1.1
         with:
           fileName: SelfContainedSolutionTest.pfx
           fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins/SelfContainedSolutionTest.pfx
           encodedString: ${{ secrets.PFX }}
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
 
