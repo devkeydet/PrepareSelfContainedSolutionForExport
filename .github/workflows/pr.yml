@@ -46,9 +46,11 @@ jobs:
           reports: reports/test.coverage
           targetdir: reports
           reporttypes: Cobertura
-      - uses: 5monkeys/cobertura-action@master
+      - name: Attach Coverage Report
+        uses: 5monkeys/cobertura-action@master
         with:
           path: reports/Cobertura.xml
           minimum_coverage: 100
+          repo_token: ${{ github.token }}
 
 
