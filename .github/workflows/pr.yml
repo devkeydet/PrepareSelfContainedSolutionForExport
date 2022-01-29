@@ -1,5 +1,8 @@
 name: pr
-on: push
+on: 
+  pull_request:
+    branches:
+    - main
 env:
   SOLUTION_PATH: ./src/SelfContainedSolutionTest/code-first
 jobs:
