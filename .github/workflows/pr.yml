@@ -17,10 +17,15 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1
       - name: Restore Packages
         run: |
           nuget restore ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln
       - name: Build Solution
         run: |
           msbuild.exe ./src/SelfContainedSolutionTest/code-first/SelfContainedSolutionTest.sln /p:configuration="Release"
+      - name: Build Solution
+        run: |
+          mstest.exe
 
