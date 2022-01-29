@@ -24,10 +24,10 @@ jobs:
       - name: Restore Packages
         run: |
           nuget restore ${{ env.SOLUTION_PATH }}.sln
-      - name: Build Solution
+      - name: Build Visual Studio Solution
         run: |
           msbuild.exe ${{ env.SOLUTION_PATH }}.sln /p:configuration="Release"
-      - name: Build Solution
+      - name: T Solution
         run: |
-          vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll
+          vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll
 
