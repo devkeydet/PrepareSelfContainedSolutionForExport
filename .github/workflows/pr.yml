@@ -59,6 +59,11 @@ jobs:
           minimum_coverage: 100
           show_line: true
           repo_token: ${{ github.token }}
+      - name: Copy Plugin dll fo Power Platform Solution Folder
+        run: |
+          $sourece = ${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll
+          $destination = ${{ env.PP_UNPACKED_SOLUTION_PATH }}/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll
+          Copy-Item $source $destination -Force
       - name: Pack Power Platform Solution
         uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
