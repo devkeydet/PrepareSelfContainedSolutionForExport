@@ -4,7 +4,8 @@ on:
     branches:
     - main
 env:
-  SOLUTION_PATH: ./src/SelfContainedSolutionTest/code-first
+  VS_SOLUTION_PATH: ./src/SelfContainedSolutionTest/code-first
+  PP_UNPACKED_SOLUTION_PATH: ./src/SelfContainedSolutionTest/unpacked-solution
 jobs:
   main:
     runs-on: windows-latest
@@ -26,13 +27,13 @@ jobs:
         uses: darenm/Setup-VSTest@v1
       - name: Restore Packages
         run: |
-          nuget restore ${{ env.SOLUTION_PATH }}/SelfContainedSolutionTest.sln
+          nuget restore ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln
       - name: Build Visual Studio Solution
         run: |
-          msbuild.exe ${{ env.SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
+          msbuild.exe ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
       - name: Run Unit Tests
         run: |
-          vstest.console.exe ${{ env.SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
+          vstest.console.exe ${{ env.VS_SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
           mkdir reports
           Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
           Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
@@ -58,5 +59,11 @@ jobs:
           minimum_coverage: 100
           show_line: true
           repo_token: ${{ github.token }}
+      - name: Pack Power Platform Solution
+        uses: microsoft/powerplatform-actions/pack-solution@v0
+        with:
+          solution-file: x.zip
+          solution-folder: ${{ env.PP_UNPACKED_SOLUTION_PATH }}
+          solution-type: Both
 
 
