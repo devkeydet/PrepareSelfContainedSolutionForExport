@@ -78,6 +78,7 @@ jobs:
           solution-file: fake.zip
           solution-folder: fake
       - if: ${{ always() }}
+        id: get-pac-path
         name: get-pac-path
         run: |
           $actionsPath = "${{ runner.temp }}".Replace("_temp","_actions")
