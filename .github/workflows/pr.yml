@@ -36,7 +36,7 @@ jobs:
         run: |
           vstest.console.exe ${{ env.VS_SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
       - name: Copy Unit Test Results
-        run |
+        run: |
           mkdir reports
           Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
           Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
