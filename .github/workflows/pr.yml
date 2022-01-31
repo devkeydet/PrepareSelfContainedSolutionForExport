@@ -100,7 +100,7 @@ jobs:
       - name: Pack
         run: |
           # was getting unexplainable issues with microsoft/powerplatform-actions/pack-solution, so dropping to direct pac cli calls
-          pac
+          . .\pack.ps1
 
 
       # - name: Pack Power Platform Solution
