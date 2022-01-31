@@ -1,3 +1,7 @@
 App As appinfo:
     BackEnabled: =false
+    OnStart: |-
+        =Set(gblDefaultSolutionId, GUID("fd140aaf-4df4-11dd-bd17-0019b9312238"));
+        Set(gblCdsDefaultSolutionId, GUID("00000001-0000-0000-0001-00000000009b"));
+        Set(gblActiveSolutionId, GUID("fd140aae-4df4-11dd-bd17-0019b9312238"));
 

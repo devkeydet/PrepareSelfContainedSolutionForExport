@@ -1,0 +1,198 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Apply_to_each": {
+          "actions": {
+            "Append_to_array_variable": {
+              "inputs": {
+                "name": "SolutionComponents",
+                "value": {
+                  "@@odata.type": "#Microsoft.Dynamics.CRM.solutioncomponent",
+                  "componenttype": "@items('Apply_to_each')['componenttype']",
+                  "objectid": "@{items('Apply_to_each')['objectid']}",
+                  "solutioncomponentid": "@{items('Apply_to_each')['solutioncomponentid']}",
+                  "solutionid@odata.bind": "/solutioncomponents(@{items('Apply_to_each')['solutionid2']})"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "62038678-3a41-4893-ba53-4ae6eab6166e"
+              },
+              "runAfter": {},
+              "type": "AppendToArrayVariable"
+            }
+          },
+          "foreach": "@body('Parse_JSON')",
+          "metadata": {
+            "operationMetadataId": "3c073e63-4aca-4937-adfc-8fe8bdecc072"
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "type": "Foreach"
+        },
+        "Initialize_variable": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "SolutionComponents",
+                "type": "array"
+              }
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f991860f-31a1-4300-a727-a5a6cc8a978f"
+          },
+          "runAfter": {
+            "Parse_JSON": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "Parse_JSON": {
+          "inputs": {
+            "content": "@triggerBody()['text']",
+            "schema": {
+              "items": {
+                "properties": {
+                  "componenttype": {
+                    "type": "integer"
+                  },
+                  "objectid": {
+                    "type": "string"
+                  },
+                  "solutioncomponentid": {
+                    "type": "string"
+                  },
+                  "solutionid2": {
+                    "type": "string"
+                  },
+                  "solutionuniquename": {}
+                },
+                "required": [
+                  "componenttype",
+                  "objectid",
+                  "solutioncomponentid",
+                  "solutionid2",
+                  "solutionuniquename"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "0a93af40-799c-4152-aacc-15dbbe67a4a5"
+          },
+          "runAfter": {},
+          "type": "ParseJson"
+        },
+        "Perform_an_unbound_action": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction"
+            },
+            "parameters": {
+              "actionName": "cat_RemoveComponentsFromUnmanagedSolutions",
+              "item/SolutionComponents": "@variables('SolutionComponents')"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "3ab090f8-bc33-4fe2-bb90-068aa0fe4bde"
+          },
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection"
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "inputs": {
+            "body": {
+              "response": "success"
+            },
+            "schema": {
+              "properties": {
+                "response": {
+                  "title": "response",
+                  "type": "string",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "type": "object"
+            },
+            "statusCode": 200
+          },
+          "kind": "PowerApp",
+          "metadata": {
+            "operationMetadataId": "0ffa7f13-8110-4573-909d-e1676014b4a2"
+          },
+          "runAfter": {
+            "Perform_an_unbound_action": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "json",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "49ae9aa7-6b2c-4f74-8b5f-d0287a95a3da"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

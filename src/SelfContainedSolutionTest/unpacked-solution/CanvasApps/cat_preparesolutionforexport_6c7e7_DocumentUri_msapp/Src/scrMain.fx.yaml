@@ -1,20 +1,55 @@
 scrMain As screen:
-    OnVisible: =Refresh(Solutions)
+    OnVisible: |-
+        =Refresh(Solutions);
+        Refresh('Solution Components');
 
-    drpSolutions As dropdown:
-        Default: ="No"
-        Height: =45
+    glrSolutions As gallery.galleryVertical:
+        Height: =332
         Items: |-
             =Sort(
                 Filter(
                     Solutions,
                     'Is Visible Outside Platform' = 'Is Visible Outside Platform (Solutions)'.Yes && 
                     'Package Type' = 'Package Type (Solutions)'.Unmanaged && 
-                    Name <> 
-                    Default && 'Solution Identifier' <> GUID("00000001-0000-0000-0001-00000000009b")
+                    'Solution Identifier' <> gblDefaultSolutionId &&
+                    'Solution Identifier' <> gblCdsDefaultSolutionId &&
+                    'Solution Identifier' <> gblActiveSolutionId
                 ),
                 'Display Name'
             )
+        Layout: =Layout.Vertical
+        TemplateSize: =83
+        Visible: =false
+        Width: =642
+        X: =724
+        ZIndex: =1
+
+        blbDisplayName As label:
+            Height: =42
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Display Name'
+            Width: =332
+            ZIndex: =1
+
+        lblSolutionId As label:
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Solution Identifier'
+            Width: =630
+            Y: =42
+            ZIndex: =2
+
+        lblName As label:
+            Height: =42
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Name
+            Width: =298
+            X: =332
+            ZIndex: =3
+
+    drpSolutions As dropdown:
+        Default: ="No"
+        Height: =45
+        Items: =glrSolutions.AllItems
         Width: =540
         X: =40
         Y: =39
@@ -24,10 +59,7 @@ scrMain As screen:
         Height: =41
         OnSelect: |
             =UpdateContext({loading: true});
-            If(
-                AddAllRequiredComponents.Run(drpSolutions.Selected.Name).result = "success",
-                Navigate(scrRemoveEnvironmentVariableValues)
-            );
+            Navigate(scrRemoveEnvironmentVariableValues);
             UpdateContext({loading: false});
         Text: ="Yes"
         Width: =316
@@ -43,12 +75,10 @@ scrMain As screen:
         ZIndex: =3
 
     imgAddAllRequiredComponentsRunning As image:
-        Height: =41
         Image: =imgLoading
         ImagePosition: =ImagePosition.Fill
         Visible: =loading
-        Width: =45
-        X: =371
-        Y: =124
+        X: =368
+        Y: =94
         ZIndex: =4
 

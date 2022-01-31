@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="Test">
+  <description default="Test">
+    <label description="Test" languagecode="1033" />
+  </description>
+  <displayname default="cat_Example.Test">
+    <label description="cat_Example.Test" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>cat_Example.Test</name>
+  <type>4</type>
+</customapiresponseproperty>

@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="DisplayName">
+  <description default="cat_GetSolutionComponentName.DisplayName">
+    <label description="cat_GetSolutionComponentName.DisplayName" languagecode="1033" />
+  </description>
+  <displayname default="cat_GetSolutionComponentName.DisplayName">
+    <label description="cat_GetSolutionComponentName.DisplayName" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>cat_GetSolutionComponentName.DisplayName</name>
+  <type>10</type>
+</customapiresponseproperty>

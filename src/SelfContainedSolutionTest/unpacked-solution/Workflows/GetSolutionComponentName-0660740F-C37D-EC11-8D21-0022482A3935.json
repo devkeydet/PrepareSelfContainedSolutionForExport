@@ -1,0 +1,112 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_60c24"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Perform_an_unbound_action": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction"
+            },
+            "parameters": {
+              "actionName": "cat_GetSolutionComponentName",
+              "item/ObjectId": "@triggerBody()['text']"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "75572b37-718c-4117-9c40-29ec4de9f905"
+          },
+          "runAfter": {},
+          "type": "OpenApiConnection"
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "inputs": {
+            "body": {
+              "msdyn_displayname": "@outputs('Perform_an_unbound_action')?['body/DisplayName']",
+              "msdyn_objectid": "@triggerBody()['text']"
+            },
+            "schema": {
+              "properties": {
+                "msdyn_displayname": {
+                  "title": "msdyn_displayname",
+                  "type": "string",
+                  "x-ms-dynamically-added": true
+                },
+                "msdyn_objectid": {
+                  "title": "msdyn_objectid",
+                  "type": "string",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "type": "object"
+            },
+            "statusCode": 200
+          },
+          "kind": "PowerApp",
+          "metadata": {
+            "operationMetadataId": "4779537d-b7b1-4b36-8b13-606a901f6865"
+          },
+          "runAfter": {
+            "Perform_an_unbound_action": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "inputs": {
+            "schema": {
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "msdyn_objectid",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          },
+          "kind": "PowerAppV2",
+          "metadata": {
+            "operationMetadataId": "aa5f33cf-8cf6-4f24-b565-e0c7db5fb9b8"
+          },
+          "type": "Request"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

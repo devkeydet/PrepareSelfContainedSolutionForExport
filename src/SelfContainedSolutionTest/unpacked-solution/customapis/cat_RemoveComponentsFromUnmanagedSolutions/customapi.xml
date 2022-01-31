@@ -1,0 +1,18 @@
+<customapi uniquename="cat_RemoveComponentsFromUnmanagedSolutions">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="cat_RemoveComponentsFromUnmanagedSolutions">
+    <label description="cat_RemoveComponentsFromUnmanagedSolutions" languagecode="1033" />
+  </description>
+  <displayname default="cat_RemoveComponentsFromUnmanagedSolutions">
+    <label description="cat_RemoveComponentsFromUnmanagedSolutions" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>cat_RemoveComponentsFromUnmanagedSolutions</name>
+  <plugintypeid>
+    <plugintypeid>16d6c1aa-26b7-43d7-9e4f-aec005373cf0</plugintypeid>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

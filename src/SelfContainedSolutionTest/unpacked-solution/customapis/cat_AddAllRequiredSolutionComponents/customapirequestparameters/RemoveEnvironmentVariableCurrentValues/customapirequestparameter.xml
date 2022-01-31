@@ -1,0 +1,9 @@
+<customapirequestparameter uniquename="RemoveEnvironmentVariableCurrentValues">
+  <displayname default="AddAllRequiredSolutionComponents.RemoveEnvironmentVariableCurrentValues">
+    <label description="AddAllRequiredSolutionComponents.RemoveEnvironmentVariableCurrentValues" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>AddAllRequiredSolutionComponents.RemoveEnvironmentVariableCurrentValues</name>
+  <type>0</type>
+</customapirequestparameter>

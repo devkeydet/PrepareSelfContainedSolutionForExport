@@ -47,7 +47,7 @@
       {
         "AFDDataSourceName": "",
         "AutoRuleBindingEnabled": false,
-        "AutoRuleBindingString": "RemoveEnvironmentVariableCurrentValues.Run(",
+        "AutoRuleBindingString": "UpdateContext({loading: true});\nIf(\n    rdoUseFlowOrApi.Selected.option = \"Custom API\",\n    If(\n        AddAllRequiredComponentsUsingCustomAPI.Run(drpSolutions.Selected.'Solution Identifier').result = \"success\",\n        Navigate(scrCheckForComponentsInOtherSolutions)\n    ),\n    If(\n        AddAllRequiredComponents.Run(drpSolutions.Selected.'Solution Identifier').result = \"success\",\n        \n        Navigate(scrCheckForComponentsInOtherSolutions)\n    )\n);\nUpdateContext({loading: false});\n",
         "InvariantPropertyName": "OnSelect",
         "IsLockable": false,
         "NameMapSourceSchema": "?"
@@ -63,7 +63,7 @@
     "LayoutName": "",
     "MetaDataIDKey": "",
     "Name": "btnRemoveEnvironmentVariableCurrentValues",
-    "ParentIndex": 1,
+    "ParentIndex": 2,
     "PersistMetaDataIDKey": false,
     "Properties": [
       {
@@ -272,8 +272,22 @@
       "ImageRotation",
       "X",
       "Y",
-      "Width",
-      "Height",
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Width",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
+      {
+        "AFDDataSourceName": "",
+        "AutoRuleBindingEnabled": false,
+        "AutoRuleBindingString": "",
+        "InvariantPropertyName": "Height",
+        "IsLockable": false,
+        "NameMapSourceSchema": "?"
+      },
       "Fill",
       "DisabledFill",
       "PressedFill",
@@ -315,7 +329,7 @@
     "LayoutName": "",
     "MetaDataIDKey": "",
     "Name": "imgRemoveEnvironmentVariableCurrentValuesRunning",
-    "ParentIndex": 2,
+    "ParentIndex": 1,
     "PersistMetaDataIDKey": false,
     "Properties": [
       {

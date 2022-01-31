@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" PluginAssemblyId="bb2613d0-d86d-4460-b4ee-6042046e2ed9" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0.0.1</IntroducedVersion>
+  <FileName>/PluginAssemblies/SelfContainedSolutionTestPlugins-BB2613D0-D86D-4460-B4EE-6042046E2ED9/SelfContainedSolutionTestPlugins.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" PluginTypeId="492c46e7-8a9b-4a75-a47a-907a87ee8b8a" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.AddAllRequiredSolutionComponents">
+      <FriendlyName>782535d3-4f77-49a4-953e-d90a41800744</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.Example, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" PluginTypeId="d83fbac0-7e16-4e91-bc90-9382f3b702f5" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.Example">
+      <FriendlyName>92a042a2-c924-4b9c-83cc-543da403bc6e</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.GetSolutionComponentName, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" PluginTypeId="770de69a-2f3a-4f7c-9010-a844028661d8" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.GetSolutionComponentName">
+      <FriendlyName>1597dcc0-d259-49c1-81bd-9f1c44ccf419</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions, SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" PluginTypeId="16d6c1aa-26b7-43d7-9e4f-aec005373cf0" Name="SelfContainedSolutionTest.Plugins.CustomAPIs.RemoveComponentsFromUnmanagedSolutions">
+      <FriendlyName>48322afa-7503-464e-ba67-25315e8c97e8</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

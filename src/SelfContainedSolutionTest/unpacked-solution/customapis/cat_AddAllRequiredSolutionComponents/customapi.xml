@@ -1,0 +1,18 @@
+<customapi uniquename="cat_AddAllRequiredSolutionComponents">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="cat_AddAllRequiredSolutionComponents">
+    <label description="cat_AddAllRequiredSolutionComponents" languagecode="1033" />
+  </description>
+  <displayname default="cat_AddAllRequiredSolutionComponents">
+    <label description="cat_AddAllRequiredSolutionComponents" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>cat_AddAllRequiredSolutionComponents</name>
+  <plugintypeid>
+    <plugintypeid>492c46e7-8a9b-4a75-a47a-907a87ee8b8a</plugintypeid>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

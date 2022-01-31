@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="SolutionComponents">
+  <description default="SolutionComponents">
+    <label description="SolutionComponents" languagecode="1033" />
+  </description>
+  <displayname default="RemoveComponentsFromUnmanagedSolutions.SolutionComponents">
+    <label description="RemoveComponentsFromUnmanagedSolutions.SolutionComponents" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>RemoveComponentsFromUnmanagedSolutions.SolutionComponents</name>
+  <type>4</type>
+</customapirequestparameter>

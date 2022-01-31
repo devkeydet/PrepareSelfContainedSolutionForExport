@@ -32,7 +32,7 @@
       "enableonstart": true,
       "enableonstartnavigate": false,
       "enablepcfmoderndatasets": true,
-      "enablepowerautomatepane": false,
+      "enablepowerautomatepane": true,
       "enablerowscopeonetonexpand": false,
       "enablerulespanel": false,
       "enablesaveloadcleardataonweb": false,

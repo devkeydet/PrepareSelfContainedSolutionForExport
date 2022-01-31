@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ObjectId">
+  <description default="cat_GetSolutionComponentName.ObjectId">
+    <label description="cat_GetSolutionComponentName.ObjectId" languagecode="1033" />
+  </description>
+  <displayname default="cat_GetSolutionComponentName.ObjectId">
+    <label description="cat_GetSolutionComponentName.ObjectId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>cat_GetSolutionComponentName.ObjectId</name>
+  <type>10</type>
+</customapirequestparameter>
