@@ -115,7 +115,7 @@ jobs:
         uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
           solution-file: x.zip
-          solution-folder: u
+          solution-folder: ${{ runner.temp }}/u
           solution-type: Both
 
 
