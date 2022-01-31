@@ -81,8 +81,7 @@
       <RootComponent type="29" id="{0660740f-c37d-ec11-8d21-0022482a3935}" behavior="0" />
       <RootComponent type="29" id="{26efda17-ac82-ec11-8d21-0022481f95ef}" behavior="0" />
       <RootComponent type="29" id="{516bbda1-517d-ec11-8d21-0022482a31f8}" behavior="0" />
-      <RootComponent type="91" id="{8feebc35-b03d-49f2-b7ca-60a3ad413e4e}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" behavior="0" />
-      <RootComponent type="91" id="{0d938548-626c-4dc8-8aab-08e6dad8ba92}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a665f77405e7b20" behavior="0" />
+      <RootComponent type="91" id="{bb2613d0-d86d-4460-b4ee-6042046e2ed9}" schemaName="SelfContainedSolutionTest.Plugins, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5a28fc6475eadaca" behavior="0" />
       <RootComponent type="300" schemaName="cat_preparesolutionforexport_6c7e7" behavior="0" />
     </RootComponents>
     <MissingDependencies>

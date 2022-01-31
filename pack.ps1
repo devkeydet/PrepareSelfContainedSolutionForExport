@@ -19,7 +19,7 @@ function Pack ($solutionName) {
   Remove-Item $msappUnpackPath -Force -Recurse
 
   $source = "$vsSolutionPath/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
-  $destination = "$unpackFolder/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
+  $destination = "$unpackFolder/PluginAssemblies/SelfContainedSolutionTestPlugins-BB2613D0-D86D-4460-B4EE-6042046E2ED9/SelfContainedSolutionTestPlugins.dll"
   Copy-Item $source $destination -Force
 
   #pac solution pack --zipfile $solutionZip --folder $unPackTemp --packagetype both

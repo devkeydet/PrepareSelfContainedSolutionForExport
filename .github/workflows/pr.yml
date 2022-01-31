@@ -75,7 +75,7 @@ jobs:
       - name: Copy Plugin dll to Power Platform Solution unpacked folder
         run: |          
           $source = "${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
-          $destination = "${{ runner.temp }}/u/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
+          $destination = "${{ runner.temp }}/u/PluginAssemblies/SelfContainedSolutionTestPlugins-BB2613D0-D86D-4460-B4EE-6042046E2ED9/SelfContainedSolutionTestPlugins.dll"
           Copy-Item $source $destination -Force
       - name: Pack Power Platform Solution
         uses: microsoft/powerplatform-actions/pack-solution@v0

@@ -37,7 +37,7 @@ namespace Plugins.Tests
             fakePluginExecutionContext.InputParameters["ObjectId"] = guidString;
 
             // Act
-            var plugin = new GetSolutionNameForComponent(fakeEarlyBoundContext);
+            var plugin = new GetSolutionComponentName(fakeEarlyBoundContext);
             plugin.Execute(fakeServiceProvider);
 
             //Assert

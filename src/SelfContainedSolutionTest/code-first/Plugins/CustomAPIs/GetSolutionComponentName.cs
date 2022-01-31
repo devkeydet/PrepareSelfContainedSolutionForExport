@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace SelfContainedSolutionTest.Plugins.CustomAPIs
 {
-    public class GetSolutionNameForComponent : PluginBase
+    public class GetSolutionComponentName : PluginBase
     {
         [ExcludeFromCodeCoverage]
-        public GetSolutionNameForComponent()
+        public GetSolutionComponentName()
                 : base(typeof(Example))
         {
             // TODO: Implement your custom configuration handling.
         }
 
-        public GetSolutionNameForComponent(IEarlyBoundContext earlyBoundContext)
+        public GetSolutionComponentName(IEarlyBoundContext earlyBoundContext)
                 : base(typeof(AddAllRequiredSolutionComponents), earlyBoundContext)
         {
             // TODO: Implement your custom configuration handling.

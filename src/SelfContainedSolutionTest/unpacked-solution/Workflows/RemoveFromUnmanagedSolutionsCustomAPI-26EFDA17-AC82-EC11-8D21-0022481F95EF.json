@@ -82,9 +82,7 @@
                   "solutionid2": {
                     "type": "string"
                   },
-                  "solutionuniquename": {
-                    "type": "string"
-                  }
+                  "solutionuniquename": {}
                 },
                 "required": [
                   "componenttype",
