@@ -99,13 +99,17 @@ jobs:
       - name: Pack Power Platform Solution (using pac)
         run: |
           # was getting unexplainable issues with microsoft/powerplatform-actions/pack-solution, so dropping to direct pac cli calls
-          . .\pack.ps1
-      # - name: Pack Power Platform Solution
-      #   uses: microsoft/powerplatform-actions/pack-solution@v0
-      #   with:
-      #     solution-file: x_managed.zip
-      #     solution-folder: ${{ env.PP_UNPACKED_SOLUTION_PATH }}
-      #     solution-type: Managed
+          #. .\pack.ps1
+          New-Item -Path "u" -ItemType Directory
+          Copy-Item "u/*" "${{ env.PP_UNPACKED_SOLUTION_PATH }}" -Recurse -Force
+          $msappUnpackPath = (Get-ChildItem "u/CanvasApps/*_msapp")[0].FullName
+          Remove-Item $msappUnpackPath -Force -Recurse
+      - name: Pack Power Platform Solution
+        uses: microsoft/powerplatform-actions/pack-solution@v0
+        with:
+          solution-file: x_managed.zip
+          solution-folder: u
+          solution-type: Managed
       # - name: Pack Power Platform Solution
       #   uses: microsoft/powerplatform-actions/pack-solution@v0
       #   with:
