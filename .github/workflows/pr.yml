@@ -47,7 +47,7 @@ jobs:
           name: Unit Test Results
           path: reports/test-report.trx
           reporter: dotnet-trx
-      - name: ReportGenerator
+      - name: Convert VS .coverage to Cobertura
         uses: danielpalme/ReportGenerator-GitHub-Action@5.0.3
         with:
           reports: reports/test.coverage
@@ -70,7 +70,6 @@ jobs:
           $source = "${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
           $destination = "${{ env.PP_UNPACKED_SOLUTION_PATH }}/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
           Copy-Item $source $destination -Force
-          pac
       - name: get-pac-path
         run: |
           $actionsPath = "${{ runner.temp }}".Replace("_temp","_actions")
@@ -91,6 +90,7 @@ jobs:
           echo "${{ steps.get-pac-path.outputs.pac_path }}" >> $GITHUB_PATH
       - name: Pack
         run: |
+          # was getting unexplainable issues with microsoft/powerplatform-actions/pack-solution, so dropping to direct pac cli calls
           pac
 
 
