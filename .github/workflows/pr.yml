@@ -16,92 +16,93 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Create Plugin snk
-        uses: timheuer/base64-to-file@v1.1
-        with:
-          fileName: SelfContainedSolutionTest.snk
-          fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins
-          encodedString: ${{ secrets.SNK }}
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
-      - name: Setup NuGet.exe for use with actions
-        uses: NuGet/setup-nuget@v1.0.5
-      - name: Setup VSTest Path
-        uses: darenm/Setup-VSTest@v1
-      - name: Restore Packages
-        run: |
-          nuget restore ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln
-      - name: Build Visual Studio Solution
-        run: |
-          msbuild.exe ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
-      - name: Run Unit Tests
-        run: |
-          vstest.console.exe ${{ env.VS_SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
-      - name: Copy Unit Test Results
-        run: |
-          mkdir reports
-          Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
-          Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
-      - name: Report Unit Test Results
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Unit Test Results
-          path: reports/test-report.trx
-          reporter: dotnet-trx
-      - name: Convert VS .coverage to Cobertura
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.0.3
-        with:
-          reports: reports/test.coverage
-          targetdir: reports
-          reporttypes: Cobertura
-      - name: Attach Coverage Report
-        uses: 5monkeys/cobertura-action@master
-        with:
-          path: reports/Cobertura.xml
-          report_name: Code Coverage
-          fail_below_threshold: true
-          minimum_coverage: 100
-          show_line: true
-          repo_token: ${{ github.token }}
-      - name: Copy Plugin dll fo Power Platform Solution Folder
-        run: |          
-          $source = "${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
-          $destination = "${{ env.PP_UNPACKED_SOLUTION_PATH }}/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
-          Copy-Item $source $destination -Force
-      # hack, but necessary until GitHub Actions for Power Platform support all pac commands
-      - if: ${{ false }} # this will never run, but will force powerplatform-actions to download
-        name: force-pac-download
-        uses: microsoft/powerplatform-actions/unpack-solution@latest
-        with:
-          solution-file: fake.zip
-          solution-folder: fake
-      - if: ${{ always() }}
-        id: get-pac-path
-        name: get-pac-path
-        run: |
-          $actionsPath = "${{ runner.temp }}".Replace("_temp","_actions")
-          if ($env:RUNNER_OS -eq "Windows") {
-            $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac\tools\pac.exe')}
-          }
-          else {
-            $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac_linux/tools/pac')}
-          }
-          $pacPath = $array[0].Directory.FullName
-          echo "pacPath: $pacPath"
-          echo "::set-output name=pac_path::$pacPath"
-      - if: ${{ always() }}
-        id: set-pac-path
-        name: set-pac-path
-        shell: bash
-        run: |
-          echo "${{ steps.get-pac-path.outputs.pac_path }}" >> $GITHUB_PATH
-      - name: Pack Power Platform Solution (using pac)
+      # - name: Create Plugin snk
+      #   uses: timheuer/base64-to-file@v1.1
+      #   with:
+      #     fileName: SelfContainedSolutionTest.snk
+      #     fileDir: ./src/SelfContainedSolutionTest/code-first/Plugins
+      #     encodedString: ${{ secrets.SNK }}
+      # - name: Add msbuild to PATH
+      #   uses: microsoft/setup-msbuild@v1.1
+      # - name: Setup NuGet.exe for use with actions
+      #   uses: NuGet/setup-nuget@v1.0.5
+      # - name: Setup VSTest Path
+      #   uses: darenm/Setup-VSTest@v1
+      # - name: Restore Packages
+      #   run: |
+      #     nuget restore ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln
+      # - name: Build Visual Studio Solution
+      #   run: |
+      #     msbuild.exe ${{ env.VS_SOLUTION_PATH }}/SelfContainedSolutionTest.sln /p:configuration="Release"
+      # - name: Run Unit Tests
+      #   run: |
+      #     vstest.console.exe ${{ env.VS_SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
+      # - name: Copy Unit Test Results
+      #   run: |
+      #     mkdir reports
+      #     Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
+      #     Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
+      # - name: Report Unit Test Results
+      #   uses: dorny/test-reporter@v1
+      #   if: success() || failure()
+      #   with:
+      #     name: Unit Test Results
+      #     path: reports/test-report.trx
+      #     reporter: dotnet-trx
+      # - name: Convert VS .coverage to Cobertura
+      #   uses: danielpalme/ReportGenerator-GitHub-Action@5.0.3
+      #   with:
+      #     reports: reports/test.coverage
+      #     targetdir: reports
+      #     reporttypes: Cobertura
+      # - name: Attach Coverage Report
+      #   uses: 5monkeys/cobertura-action@master
+      #   with:
+      #     path: reports/Cobertura.xml
+      #     report_name: Code Coverage
+      #     fail_below_threshold: true
+      #     minimum_coverage: 100
+      #     show_line: true
+      #     repo_token: ${{ github.token }}
+      # - name: Copy Plugin dll fo Power Platform Solution Folder
+      #   run: |          
+      #     $source = "${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
+      #     $destination = "${{ env.PP_UNPACKED_SOLUTION_PATH }}/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
+      #     Copy-Item $source $destination -Force
+      # # hack, but necessary until GitHub Actions for Power Platform support all pac commands
+      # - if: ${{ false }} # this will never run, but will force powerplatform-actions to download
+      #   name: force-pac-download
+      #   uses: microsoft/powerplatform-actions/unpack-solution@latest
+      #   with:
+      #     solution-file: fake.zip
+      #     solution-folder: fake
+      # - if: ${{ always() }}
+      #   id: get-pac-path
+      #   name: get-pac-path
+      #   run: |
+      #     $actionsPath = "${{ runner.temp }}".Replace("_temp","_actions")
+      #     if ($env:RUNNER_OS -eq "Windows") {
+      #       $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac\tools\pac.exe')}
+      #     }
+      #     else {
+      #       $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac_linux/tools/pac')}
+      #     }
+      #     $pacPath = $array[0].Directory.FullName
+      #     echo "pacPath: $pacPath"
+      #     echo "::set-output name=pac_path::$pacPath"
+      # - if: ${{ always() }}
+      #   id: set-pac-path
+      #   name: set-pac-path
+      #   shell: bash
+      #   run: |
+      #     echo "${{ steps.get-pac-path.outputs.pac_path }}" >> $GITHUB_PATH
+      - name: Prepare Power Platform Solution for pack
         run: |
           # was getting unexplainable issues with microsoft/powerplatform-actions/pack-solution, so dropping to direct pac cli calls
           #. .\pack.ps1
-          New-Item -Path "u" -ItemType Directory
-          Copy-Item "${{ env.PP_UNPACKED_SOLUTION_PATH }}" "u/*" -Recurse -Force
+          # Ran into pack issues with long paths, so moving to a directory to workaround issue
+          $tempUnpacked = (New-Item -Path "u" -ItemType Directory).FullName
+          Copy-Item "${{ env.PP_UNPACKED_SOLUTION_PATH }}" "$tempUnpacked/*" -Recurse -Force
           $msappUnpackPath = (Get-ChildItem "u/CanvasApps/*_msapp")[0].FullName
           Remove-Item $msappUnpackPath -Force -Recurse
       # - name: Pack Power Platform Solution
