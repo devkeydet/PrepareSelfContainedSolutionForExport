@@ -61,6 +61,7 @@ jobs:
           repo_token: ${{ github.token }}
       - name: Copy Plugin dll fo Power Platform Solution Folder
         run: |
+          # TODO: pack canvas app, but for now we're just using the msapp, need to delete _msapp file to work
           $msappUnpackPath = (Get-ChildItem "${{ env.PP_UNPACKED_SOLUTION_PATH }}/CanvasApps/*_msapp" -Recurse)[0].FullName
           Remove-Item $msappUnpackPath -Force -Recurse
           $source = "${{ env.VS_SOLUTION_PATH }}/Plugins/bin/Release/SelfContainedSolutionTest.Plugins.dll"
@@ -69,8 +70,14 @@ jobs:
       - name: Pack Power Platform Solution
         uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
+          solution-file: x_managed.zip
+          solution-folder: ${{ env.PP_UNPACKED_SOLUTION_PATH }}
+          solution-type: Managed
+      - name: Pack Power Platform Solution
+        uses: microsoft/powerplatform-actions/pack-solution@v0
+        with:
           solution-file: x.zip
           solution-folder: ${{ env.PP_UNPACKED_SOLUTION_PATH }}
-          solution-type: Both
+          solution-type: Unmanaged
 
 
