@@ -103,7 +103,7 @@ jobs:
           # Ran into pack issues with long paths, so moving to a directory to workaround issue
           $tempUnpacked = (New-Item -Path "${{ runner.temp }}/u" -ItemType Directory).FullName
           Copy-Item "${{ env.PP_UNPACKED_SOLUTION_PATH }}/*" "$tempUnpacked" -Recurse -Force
-          $msappUnpackPath = (Get-ChildItem "u/CanvasApps/*_msapp")[0].FullName
+          $msappUnpackPath = (Get-ChildItem "$tempUnpacked/CanvasApps/*_msapp")[0].FullName
           Remove-Item $msappUnpackPath -Force -Recurse
       # - name: Pack Power Platform Solution
       #   uses: microsoft/powerplatform-actions/pack-solution@v0
