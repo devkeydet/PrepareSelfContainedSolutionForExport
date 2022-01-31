@@ -9,6 +9,8 @@ namespace SelfContainedSolutionTest.Plugins.EarlyBound
         IQueryable<SolutionComponent> SolutionComponentSet { get; }
         IQueryable<Solution> SolutionSet { get; }
 
+        IQueryable<msdyn_solutioncomponentsummary> msdyn_solutioncomponentsummarySet { get; }
+
         void AddSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName);
 
         void RemoveSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName);

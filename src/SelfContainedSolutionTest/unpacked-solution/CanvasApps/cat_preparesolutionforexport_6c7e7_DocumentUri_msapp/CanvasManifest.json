@@ -96,8 +96,6 @@
   "ScreenOrder": [
     "scrMain",
     "scrRemoveEnvironmentVariableValues",
-    "scrCheckForComponentsInOtherSolutions",
-    "scrCollectionsViewer",
-    "Screen1"
+    "scrCheckForComponentsInOtherSolutions"
   ]
 }

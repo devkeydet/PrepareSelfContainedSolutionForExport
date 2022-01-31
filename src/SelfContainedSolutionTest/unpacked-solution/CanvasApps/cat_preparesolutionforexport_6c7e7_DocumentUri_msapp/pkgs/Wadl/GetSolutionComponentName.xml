@@ -6,15 +6,11 @@
       <object name="ManualTriggerInput">
         <property name="text" type="string" />
       </object>
-      <string name="ResponseActionOutput_msdyn_objectid_def" />
       <string name="ResponseActionOutput_msdyn_displayname_def" />
-      <string name="ResponseActionOutput_msdyn_solutionid_def" />
-      <integer name="ResponseActionOutput_msdyn_componenttype_def" />
+      <string name="ResponseActionOutput_msdyn_objectid_def" />
       <object name="ResponseActionOutput">
-        <property name="msdyn_objectid" type="string" />
         <property name="msdyn_displayname" type="string" />
-        <property name="msdyn_solutionid" type="string" />
-        <property name="msdyn_componenttype" type="integer" />
+        <property name="msdyn_objectid" type="string" />
       </object>
       <object name="Run_responses_default_def" />
     </jsonTypes>

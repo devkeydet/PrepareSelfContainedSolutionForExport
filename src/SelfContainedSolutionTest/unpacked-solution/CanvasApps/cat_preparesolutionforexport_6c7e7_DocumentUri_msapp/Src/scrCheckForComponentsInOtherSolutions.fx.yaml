@@ -1,5 +1,5 @@
 scrCheckForComponentsInOtherSolutions As screen:
-    OnVisible: |-
+    OnVisible: |
         =Clear(colSolutionComponentsInMultipleSolutions);
         UpdateContext({loading: true});
         //Refresh('Solution Components');
@@ -74,25 +74,28 @@ scrCheckForComponentsInOtherSolutions As screen:
             DropColumns(
                 Filter(
                     Ungroup(
-                        AddColumns(
-                            RenameColumns(
-                                colSolutionComponentsInSelectedSolution,
-                                "objectid",
-                                "selectedobjectid",
-                                "solutioncomponentid",
-                                "selectedsolutioncomponentid",
-                                "solutionid",
-                                "selectedsolutionid",
-                                "componenttype",
-                                "selectedcomponenttype"
-                            ) As is,
-                            "temp",
-                            Filter(
-                                colSolutionComponentsInOtherSolutions,
-                                objectid = is.selectedobjectid
-                            )
+                        Ungroup(
+                            AddColumns(
+                                RenameColumns(
+                                    colSolutionComponentsInSelectedSolution,
+                                    "objectid",
+                                    "selectedobjectid",
+                                    "solutioncomponentid",
+                                    "selectedsolutioncomponentid",
+                                    "solutionid",
+                                    "selectedsolutionid",
+                                    "componenttype",
+                                    "selectedcomponenttype"
+                                ) As iss,
+                                "temp",
+                                Filter(
+                                    colSolutionComponentsInOtherSolutions,
+                                    objectid = iss.selectedobjectid
+                                )
+                            ),
+                            "temp"
                         ),
-                        "temp"
+                        "solutionid"
                     ),
                     !IsBlank(ThisRecord.objectid)
                 ),
@@ -161,7 +164,7 @@ scrCheckForComponentsInOtherSolutions As screen:
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Text: =ThisItem.solutionid.Name
+            Text: =LookUp(glrSolutions.AllItems, 'Solution Identifier' = ThisItem.solutionid.'Solution Identifier', Name)
             VerticalAlign: =VerticalAlign.Top
             Width: =Parent.TemplateWidth - 104
             X: =32

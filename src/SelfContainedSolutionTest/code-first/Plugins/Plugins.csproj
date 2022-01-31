@@ -107,11 +107,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomAPIs\Example.cs" />
+    <Compile Include="CustomAPIs\GetSolutionComponentName.cs" />
     <Compile Include="EarlyBound\IEarlyBoundContext.cs" />
     <Compile Include="CustomAPIs\RemoveComponentsFromUnmanagedSolutions.cs" />
     <Compile Include="Base\ILocalPluginContext.cs" />
     <Compile Include="Base\LocalPluginContext.cs" />
     <Compile Include="Base\LocalTracingService.cs" />
+    <Compile Include="EarlyBound\msdyn_solutioncomponentsummary.cs" />
     <Compile Include="TableControllers\SolutionComponentController.cs" />
     <Compile Include="EarlyBound\EarlyBoundContext.cs" />
     <Compile Include="CustomAPIs\AddAllRequiredSolutionComponents.cs" />

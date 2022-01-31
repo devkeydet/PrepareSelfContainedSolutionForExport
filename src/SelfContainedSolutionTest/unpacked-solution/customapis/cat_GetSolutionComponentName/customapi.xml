@@ -1,0 +1,18 @@
+<customapi uniquename="cat_GetSolutionComponentName">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="cat_GetSolutionComponentName">
+    <label description="cat_GetSolutionComponentName" languagecode="1033" />
+  </description>
+  <displayname default="cat_GetSolutionComponentName">
+    <label description="cat_GetSolutionComponentName" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>cat_GetSolutionComponentName</name>
+  <plugintypeid>
+    <plugintypeid>7bef9ed3-c2ce-41a9-afb2-32bedcb12373</plugintypeid>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

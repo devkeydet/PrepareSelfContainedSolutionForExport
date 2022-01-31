@@ -16,6 +16,8 @@ namespace SelfContainedSolutionTest.Plugins.EarlyBound
 
         public IQueryable<Solution> SolutionSet => CreateQuery<Solution>();
 
+        public IQueryable<msdyn_solutioncomponentsummary> msdyn_solutioncomponentsummarySet => CreateQuery<msdyn_solutioncomponentsummary>();
+
         public void AddSolutionComponent(Guid? componentId, OptionSetValue componentType, string solutionUniqueName)
         {
             var request = new AddSolutionComponentRequest

@@ -1,9 +1,10 @@
 [
   {
-    "AddinConnectorId": "6210be83-e0ff-482d-b549-75a7757aea6d",
-    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "6210be83-e0ff-482d-b549-75a7757aea6d",
     "Name": "GetSolutionComponentName",
-    "ServiceKind": "AddinWadl",
-    "Type": "ServiceInfo"
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "0660740f-c37d-ec11-8d21-0022482a3935"
   }
 ]

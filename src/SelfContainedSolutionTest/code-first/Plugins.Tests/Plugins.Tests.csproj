@@ -187,6 +187,7 @@
   <ItemGroup>
     <Compile Include="PluginTestBase.cs" />
     <Compile Include="TestsForAddAllRequiredSolutionComponents.cs" />
+    <Compile Include="TestsForExample - Copy.cs" />
     <Compile Include="TestsForExample.cs" />
     <Compile Include="TestsForRemoveComponentsFromUnmanagedSolutions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
