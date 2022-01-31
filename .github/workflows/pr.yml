@@ -97,12 +97,10 @@ jobs:
         shell: bash
         run: |
           echo "${{ steps.get-pac-path.outputs.pac_path }}" >> $GITHUB_PATH
-      - name: Pack
+      - name: Pack Power Platform Solution (using pac)
         run: |
           # was getting unexplainable issues with microsoft/powerplatform-actions/pack-solution, so dropping to direct pac cli calls
           . .\pack.ps1
-
-
       # - name: Pack Power Platform Solution
       #   uses: microsoft/powerplatform-actions/pack-solution@v0
       #   with:

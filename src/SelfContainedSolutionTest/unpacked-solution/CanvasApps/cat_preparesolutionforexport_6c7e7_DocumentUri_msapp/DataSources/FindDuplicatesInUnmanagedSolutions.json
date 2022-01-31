@@ -1,9 +1,0 @@
-[
-  {
-    "AddinConnectorId": "e75ee413-338e-45cc-9f2f-ab7c373548e3",
-    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
-    "Name": "FindDuplicatesInUnmanagedSolutions",
-    "ServiceKind": "AddinWadl",
-    "Type": "ServiceInfo"
-  }
-]
