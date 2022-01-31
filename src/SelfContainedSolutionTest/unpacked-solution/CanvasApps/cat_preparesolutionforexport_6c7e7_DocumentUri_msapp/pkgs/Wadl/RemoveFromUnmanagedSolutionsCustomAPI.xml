@@ -1,14 +1,14 @@
-<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="AddAllRequiredComponents" xmlns="http://wadl.dev.java.net/2009/02">
-  <doc title="AddAllRequiredComponents" />
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="RemoveFromUnmanagedSolutionsCustomAPI" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="RemoveFromUnmanagedSolutionsCustomAPI" />
   <grammars>
     <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
       <string name="ManualTriggerInput_text_def" />
       <object name="ManualTriggerInput">
         <property name="text" type="string" />
       </object>
-      <string name="ResponseActionOutput_result_def" />
+      <string name="ResponseActionOutput_response_def" />
       <object name="ResponseActionOutput">
-        <property name="result" type="string" />
+        <property name="response" type="string" />
       </object>
       <object name="Run_responses_default_def" />
     </jsonTypes>
@@ -24,7 +24,7 @@
           </param>
           <representation mediaType="application/json">
             <param style="plain" name="text" path="/text" type="xs:string" required="true">
-              <doc title="SolutionUniqueName" />
+              <doc title="json" />
             </param>
           </representation>
         </request>

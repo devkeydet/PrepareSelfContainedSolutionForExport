@@ -1,9 +1,0 @@
-[
-  {
-    "AddinConnectorId": "bdcbb0cc-2e1d-4ef9-99b3-ef185e2942c9",
-    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
-    "Name": "RemoveEnvironmentVariableCurrentValues",
-    "ServiceKind": "AddinWadl",
-    "Type": "ServiceInfo"
-  }
-]

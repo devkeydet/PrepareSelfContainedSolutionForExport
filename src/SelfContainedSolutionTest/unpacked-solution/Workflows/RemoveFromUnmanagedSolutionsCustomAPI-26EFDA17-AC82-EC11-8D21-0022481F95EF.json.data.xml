@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Workflow WorkflowId="{133ce52f-c47b-ec11-8d21-00224829f478}" Name="RemoveEnvironmentVariableCurrentValues" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <JsonFileName>/Workflows/RemoveEnvironmentVariableCurrentValues-133CE52F-C47B-EC11-8D21-00224829F478.json</JsonFileName>
+<Workflow WorkflowId="{26efda17-ac82-ec11-8d21-0022481f95ef}" Name="RemoveFromUnmanagedSolutionsCustomAPI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/RemoveFromUnmanagedSolutionsCustomAPI-26EFDA17-AC82-EC11-8D21-0022481F95EF.json</JsonFileName>
   <Type>1</Type>
   <Subprocess>0</Subprocess>
   <Category>5</Category>
@@ -15,11 +15,12 @@
   <StatusCode>2</StatusCode>
   <RunAs>1</RunAs>
   <IsTransacted>1</IsTransacted>
-  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IntroducedVersion>1.0.0.1</IntroducedVersion>
   <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
   <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
   <PrimaryEntity>none</PrimaryEntity>
   <LocalizedNames>
-    <LocalizedName languagecode="1033" description="RemoveEnvironmentVariableCurrentValues" />
+    <LocalizedName languagecode="1033" description="RemoveFromUnmanagedSolutionsCustomAPI" />
   </LocalizedNames>
 </Workflow>

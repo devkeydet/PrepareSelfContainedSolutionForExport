@@ -19,29 +19,12 @@ scrRemoveEnvironmentVariableValues As screen:
         OnSelect: |
             =UpdateContext({loading: true});
             If(
-                rdoUseFlowOrApi.Selected.option = "Custom API",
-                If(
-                    AddAllRequiredComponentsUsingCustomAPI.Run(drpSolutions.Selected.'Solution Identifier').result = "success",
-                    Navigate(scrCheckForComponentsInOtherSolutions)
-                ),
-                If(
-                    AddAllRequiredComponents.Run(drpSolutions.Selected.'Solution Identifier').result = "success",
-                    If(RemoveEnvironmentVariableCurrentValues.Run(drpSolutions.Selected.Name, drpSolutions.Selected.'Solution Identifier').response
-                    Navigate(scrCheckForComponentsInOtherSolutions)
-                )
+                AddAllRequiredComponentsUsingCustomAPI.Run(drpSolutions.Selected.'Solution Identifier').result = "success",
+                Navigate(scrCheckForComponentsInOtherSolutions)
             );
             UpdateContext({loading: false});
         Text: ="Yes"
         X: =40
         Y: =80
         ZIndex: =3
-
-    rdoUseFlowOrApi As radio:
-        Default: ="Custom API"
-        Items: |-
-            =Table({option:"Flow"},{option:"Custom API"})
-        Width: =476
-        X: =40
-        Y: =133
-        ZIndex: =4
 

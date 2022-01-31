@@ -95,5 +95,3 @@ jobs:
           use-deployment-settings-file: true
           deployment-settings-file: src/SelfContainedSolutionTest/config/deploymentSettings.json
           run-asynchronously: true
-
-

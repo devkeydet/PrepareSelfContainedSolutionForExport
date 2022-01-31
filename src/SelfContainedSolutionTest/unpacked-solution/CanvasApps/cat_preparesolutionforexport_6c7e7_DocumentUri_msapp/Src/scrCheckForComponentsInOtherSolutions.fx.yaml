@@ -212,10 +212,16 @@ scrCheckForComponentsInOtherSolutions As screen:
             =UpdateContext({deleting: true});
             ClearCollect(
                 colRemoveFromUnmanagedSolutionsDTO,
-                AddColumns(colSolutionComponentsInMultipleSolutions,"solutionuniquename",solutionid.Name)
+                AddColumns(
+                    colSolutionComponentsInMultipleSolutions,
+                    "solutionuniquename",
+                    solutionid.Name,
+                    "solutionid2",
+                    solutionid.'Solution Identifier'
+                )
             );
             If(
-                RemoveFromUnmanagedSolutions.Run(JSON(colRemoveFromUnmanagedSolutionsDTO)).response = "success",
+                RemoveFromUnmanagedSolutionsCustomAPI.Run(JSON(colRemoveFromUnmanagedSolutionsDTO)).response = "success",
                 UpdateContext({loading: true});
                 Navigate(scrMain)
             );

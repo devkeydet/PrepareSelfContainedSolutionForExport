@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "f7a07ce7-118c-4f22-b934-ef2f75354315",
+    "Name": "RemoveFromUnmanagedSolutionsCustomAPI",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "26efda17-ac82-ec11-8d21-0022481f95ef"
+  }
+]
