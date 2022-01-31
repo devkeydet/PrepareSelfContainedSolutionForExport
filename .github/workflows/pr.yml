@@ -92,8 +92,8 @@ jobs:
           app-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           force-overwrite: true
-          # use-deployment-settings-file: true
-          # deployment-settings-file: src/${{ inputs.solution_name }}/config/deploymentSettings.json
+          use-deployment-settings-file: true
+          deployment-settings-file: src/SelfContainedSolutionTest/config/deploymentSettings.json
           run-asynchronously: true
 
 

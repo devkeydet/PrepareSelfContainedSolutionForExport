@@ -1,0 +1,15 @@
+{
+  "EnvironmentVariables": [],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "cat_sharedcommondataserviceforapps_60c24",
+      "ConnectionId": "183d12d337784041a4522aa006a9be62",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    },
+    {
+      "LogicalName": "cat_sharedwebcontents_58623",
+      "ConnectionId": "b8294fe103fd47c891f69efed5dc9c5c",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_webcontents"
+    }
+  ]
+}
