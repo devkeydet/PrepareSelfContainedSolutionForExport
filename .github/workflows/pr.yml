@@ -14,7 +14,7 @@ jobs:
         run: |
           git config --global core.longpaths true
       - uses: actions/checkout@v2
-      - name: base64-to-file
+      - name: Create Plugin snk
         uses: timheuer/base64-to-file@v1.1
         with:
           fileName: SelfContainedSolutionTest.snk
@@ -35,6 +35,8 @@ jobs:
       - name: Run Unit Tests
         run: |
           vstest.console.exe ${{ env.VS_SOLUTION_PATH }}/Plugins.Tests/bin/Release/SelfContainedSolutionTest.Plugins.Tests.dll /Enablecodecoverage /Logger:trx
+      - name: Copy Unit Test Results
+        run |
           mkdir reports
           Copy-Item (Get-ChildItem *.trx -Recurse)[0].FullName reports/test-report.trx
           Copy-Item (Get-ChildItem *.coverage -Recurse)[0] reports/test.coverage
@@ -69,6 +71,29 @@ jobs:
           $destination = "${{ env.PP_UNPACKED_SOLUTION_PATH }}/PluginAssemblies/SelfContainedSolutionTestPlugins-0D938548-626C-4DC8-8AAB-08E6DAD8BA92/SelfContainedSolutionTestPlugins.dll"
           Copy-Item $source $destination -Force
           pac
+      - name: get-pac-path
+        run: |
+          $actionsPath = "${{ runner.temp }}".Replace("_temp","_actions")
+          if ($env:RUNNER_OS -eq "Windows") {
+            $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac\tools\pac.exe')}
+          }
+          else {
+            $array = Get-ChildItem $actionsPath -Recurse | Where-Object{$_.FullName.EndsWith('pac_linux/tools/pac')}
+          }
+          $pacPath = $array[0].Directory.FullName
+          echo "pacPath: $pacPath"
+          echo "::set-output name=pac_path::$pacPath"
+      - if: ${{ always() }}
+        id: set-pac-path
+        name: set-pac-path
+        shell: bash
+        run: |
+          echo "${{ steps.get-pac-path.outputs.pac_path }}" >> $GITHUB_PATH
+      - name: Pack
+        run: |
+          pac
+
+
       # - name: Pack Power Platform Solution
       #   uses: microsoft/powerplatform-actions/pack-solution@v0
       #   with:
