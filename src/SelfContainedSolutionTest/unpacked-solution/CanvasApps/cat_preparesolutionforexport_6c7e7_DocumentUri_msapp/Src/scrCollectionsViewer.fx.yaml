@@ -1,0 +1,209 @@
+scrCollectionsViewer As screen:
+    OnVisible: |-
+        =UpdateContext({tableWidth:Max(App.Width, App.MinScreenWidth)/2});
+
+    dtblSolutionComponentsInSelectedSolution As dataTable.datatable:
+        BorderStyle: =BorderStyle.Solid
+        DisplayMode: =DisplayMode.Edit
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =225
+        Items: =colSolutionComponentsInSelectedSolution
+        Width: =tableWidth
+        X: =0
+        Y: =40
+        ZIndex: =1
+
+        componenttype_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="componenttype"
+            FieldName: ="componenttype"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =ThisItem.componenttype
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+        objectid_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="objectid"
+            FieldName: ="objectid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =ThisItem.objectid
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =2
+
+        solutioncomponentid_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="solutioncomponentid"
+            FieldName: ="solutioncomponentid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =3
+            Text: =ThisItem.solutioncomponentid
+            Width: =100
+            X: =276
+            Y: =0
+            ZIndex: =3
+
+        solutionid_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="solutionid"
+            FieldName: ="solutionid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =4
+            Text: =ThisItem.solutionid.Name
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =4
+
+    Label2 As label:
+        Text: ="colSolutionComponentsInSelectedSolution (" & CountRows(colSolutionComponentsInSelectedSolution) & ")"
+        Width: =398
+        ZIndex: =2
+
+    Label4 As label:
+        Height: =27
+        Text: ="colSolutionComponentsInOtherSolutions (" & CountRows(colSolutionComponentsInOtherSolutions) & ")"
+        Width: =426
+        Y: =276
+        ZIndex: =3
+
+    dtblSolutionComponentsInOtherSolutions As dataTable.datatable:
+        BorderStyle: =BorderStyle.Solid
+        DisplayMode: =DisplayMode.Edit
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =463
+        Items: =colSolutionComponentsInOtherSolutions
+        Width: =tableWidth
+        X: =0
+        Y: =305
+        ZIndex: =4
+
+        componenttype_Column2 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="componenttype"
+            FieldName: ="componenttype"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =ThisItem.componenttype
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =5
+
+        objectid_Column2 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="objectid"
+            FieldName: ="objectid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =ThisItem.objectid
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+        solutioncomponentid_Column2 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="solutioncomponentid"
+            FieldName: ="solutioncomponentid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =3
+            Text: =ThisItem.solutioncomponentid
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =7
+
+        solutionid_Column2 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="solutionid"
+            FieldName: ="solutionid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =4
+            Text: =ThisItem.solutionid.Name
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =8
+
+    Label5 As label:
+        Text: ="colSolutionComponentsInMultipleSolutions (" & CountRows(colSolutionComponentsInMultipleSolutions) & ")"
+        Width: =683
+        X: =683
+        ZIndex: =6
+
+    dtblSolutionComponentsInMultipleSolutions As dataTable.datatable:
+        BorderStyle: =BorderStyle.Solid
+        DisplayMode: =DisplayMode.Edit
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =500
+        Items: =colSolutionComponentsInMultipleSolutions
+        Width: =tableWidth
+        X: =683
+        Y: =40
+        ZIndex: =7
+
+        componenttype_Column3 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="componenttype"
+            FieldName: ="componenttype"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =ThisItem.componenttype
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =9
+
+        objectid_Column4 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="objectid"
+            FieldName: ="objectid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =ThisItem.objectid
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =10
+
+        solutioncomponentid_Column4 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="solutioncomponentid"
+            FieldName: ="solutioncomponentid"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =3
+            Text: =ThisItem.solutioncomponentid
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =11
+

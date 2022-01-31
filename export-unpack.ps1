@@ -16,12 +16,12 @@ function Export-Unpack ($solutionName) {
   pac solution export --name $solutionName --path $managedZip --managed true
   pac solution unpack --zipfile $unmanagedZip --folder $unpackFolder --allowDelete true --packagetype both
 
-  # $msappFiles = Get-ChildItem -Path "$unpackFolder/CanvasApps" -Filter *.msapp
-  # foreach ($msappFile in $msappFiles) {
-  #     $directoryToCreate = $msappFile.FullName.Replace(".msapp","_msapp")
-  #     New-Item -Path $directoryToCreate -Type Directory -Force
-  #     pac canvas unpack --msapp $msappFile.FullName --sources $directoryToCreate
-  # }
+  $msappFiles = Get-ChildItem -Path "$unpackFolder/CanvasApps" -Filter *.msapp
+  foreach ($msappFile in $msappFiles) {
+      $directoryToCreate = $msappFile.FullName.Replace(".msapp","_msapp")
+      New-Item -Path $directoryToCreate -Type Directory -Force
+      pac canvas unpack --msapp $msappFile.FullName --sources $directoryToCreate
+  }
 
   Get-ChildItem -Path $unpackFolder -Recurse -Filter *.json | 
     ForEach-Object {

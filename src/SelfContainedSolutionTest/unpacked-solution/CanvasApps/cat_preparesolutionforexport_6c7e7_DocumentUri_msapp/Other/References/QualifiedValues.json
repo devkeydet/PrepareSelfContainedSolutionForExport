@@ -1,0 +1,28 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_solution_forms",
+      "Namespace": "Solutions (Forms)",
+      "Values": {
+        "Information": "75e0f489-3e68-11dd-81ce-00188b01dce6"
+      }
+    },
+    {
+      "Kind": "default.cds_solutioncomponent_forms",
+      "Namespace": "Solution Components (Forms)",
+      "Values": {}
+    },
+    {
+      "Kind": "default.cds_msdyn_solutioncomponentsummary_forms",
+      "Namespace": "Solution Component Summaries (Forms)",
+      "Values": {
+        "Information": "fadc6612-4671-476e-a5f8-e730c96bb6af"
+      }
+    },
+    {
+      "Kind": "default.cds_organization_forms",
+      "Namespace": "Organizations (Forms)",
+      "Values": {}
+    }
+  ]
+}

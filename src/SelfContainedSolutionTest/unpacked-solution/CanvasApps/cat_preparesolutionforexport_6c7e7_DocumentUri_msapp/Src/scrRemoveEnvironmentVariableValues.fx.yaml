@@ -1,0 +1,47 @@
+scrRemoveEnvironmentVariableValues As screen:
+
+    imgRemoveEnvironmentVariableCurrentValuesRunning As image:
+        Image: =imgLoading
+        ImagePosition: =ImagePosition.Fill
+        Visible: =loading
+        X: =215
+        Y: =50
+        ZIndex: =1
+
+    lblRemoveEnvironmentVariableCurrentValues As label:
+        Text: ="Do you want to remove Envirnonment Variable current values?"
+        Width: =700
+        X: =40
+        Y: =40
+        ZIndex: =2
+
+    btnRemoveEnvironmentVariableCurrentValues As button:
+        OnSelect: |
+            =UpdateContext({loading: true});
+            If(
+                rdoUseFlowOrApi.Selected.option = "Custom API",
+                If(
+                    AddAllRequiredComponentsUsingCustomAPI.Run(drpSolutions.Selected.'Solution Identifier').result = "success",
+                    Navigate(scrCheckForComponentsInOtherSolutions)
+                ),
+                If(
+                    AddAllRequiredComponents.Run(drpSolutions.Selected.'Solution Identifier').result = "success",
+                    If(RemoveEnvironmentVariableCurrentValues.Run(drpSolutions.Selected.Name, drpSolutions.Selected.'Solution Identifier').response
+                    Navigate(scrCheckForComponentsInOtherSolutions)
+                )
+            );
+            UpdateContext({loading: false});
+        Text: ="Yes"
+        X: =40
+        Y: =80
+        ZIndex: =3
+
+    rdoUseFlowOrApi As radio:
+        Default: ="Custom API"
+        Items: |-
+            =Table({option:"Flow"},{option:"Custom API"})
+        Width: =476
+        X: =40
+        Y: =133
+        ZIndex: =4
+
